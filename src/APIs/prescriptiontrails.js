@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import 'axios';
 // const axios = require('axios');
 // // export var trailResults = { }
@@ -23,6 +24,73 @@
 //             'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
 //         }
 //     }
+=======
+import axios from 'axios';
+export var trailResults = { }
+
+const test_lat = "33.685909"
+const test_long = "-117.824722"
+
+// const convertZipToLatLong = (zipcode) => {
+//     const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
+//     const api_address = `https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}`;
+    
+//     axios.get(api_address)
+//     .then(response => {
+//         const lat = response.data.location.latitude;
+//         const lon = response.data.location.longitude;
+//         console.log(lat);
+//         console.log(lon);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+
+//     return lat , lon ;
+// };
+
+// f255df9efb841bfe43ab2d741c695756ac4a6cf5
+
+export const createOptions = (zipcode) => {
+    // latitude, longitude = convertZipToLatLong(zipcode);
+    return {
+        method: 'GET',
+        url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
+        params: {
+            lat: test_lat,
+            lon: test_long
+        },
+        headers: {
+            'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
+            'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
+        }
+    }
+};
+
+export const getResponse = async (zipcode) => {
+    try {
+        console.log("Success")
+        let response = await axios.request(createOptions(zipcode));
+        response = response.data.data
+        console.log(response)
+        return response
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+// }
+//   method: 'GET',
+//   url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
+//   params: {
+//     lat: '<REQUIRED>',
+//     lon: '<REQUIRED>'
+//   },
+//   headers: {
+//     'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
+//     'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
+//   }
+>>>>>>> f42811ac8626f3168fb920735661ab2422d11655
 // };
 
 // export const getTrails = async (zipcode) => {
