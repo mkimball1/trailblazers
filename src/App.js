@@ -1,13 +1,13 @@
 import { useState,useEffect } from "react";
-import {getResponse} from "./APIs/prescriptiontrails"
+import {getResponse, convertZipToLatLong} from "./APIs/prescriptiontrails"
 
 function App() {
-  const [zip, setZip] = useState("")
+  const [zip, setZip] = useState("92697")
   const [trailResults, setTrailResults] = useState({})
 
   useEffect(() => {
     // This code runs when `zip` changes
-    console.log(zip)
+    // console.log(zip)
     console.log(trailResults);
   }, [zip, trailResults]);
 
@@ -18,7 +18,13 @@ function App() {
         getResponse(zip).then(response => {
           setTrailResults(response)
         })
-      }}> CLICK ME </button>
+
+      //   convertZipToLatLong(92697).then((data) => {
+      //     console.log(`Lat: ${data.longitude}, Long: ${data.latitude}`)
+      // })
+
+        // convertZipToLatLong(92697)
+      }}> TEST!! CLICK ME </button>
 
       {/* <button onClick={() => {
         console.log(trailResults)
