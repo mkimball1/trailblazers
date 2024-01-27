@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import { getTrails } from "../APIs/rapidapi"
 import { convertZipToLatLong } from "../APIs/thezipcodes"
+import { getCurrentPosition } from "../APIs/currentloc";
 import "./UserInput.css"
 
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
@@ -47,6 +48,26 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
         });
     };
 
+    const useCurrentLocation = (e) => {
+        e.preventDefault();
+        getCurrentPosition((latitude, longitude) => {
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            const my_data = {
+                latitude: latitude,
+                longitude: longitude,
+                radius: radius,
+                difficulty: difficulty
+            };
+
+            getTrails(my_data).then(response => {
+                setTrailResults(response);
+            });
+        }, (error) => {
+            console.error(error);
+    
+        });
+    };
+
     return (
       <div>
         <form>
@@ -86,22 +107,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
             <label > Advanced </label>
             <br/>
 
-            <button onClick={(e) => {
-            e.preventDefault();
-            // TODO: Get current long and lat & update zipcode
-            // Make API call to find lat & long
-            let latitude = 37.5538 //placeholder value
-            let longitude = -122.27 //placeholder value
-            let my_data = {
-                latitude: latitude, 
-                longitude: longitude,
-                radius: radius,
-                difficulty: difficulty
-            }
-            getTrails(my_data).then(response => {
-                setTrailResults(response)
-            })
-            }}> Use Current Location </button>
+            <button onClick={useCurrentLocation}> Use Current Location </button>
         
             <button onClick={submitZipcode}> SUBMIT </button>
         </form>
