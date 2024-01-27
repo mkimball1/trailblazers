@@ -3,8 +3,24 @@ const axios = require('axios');
 export var trailResults = { }
 
 const convertZipToLatLong = (zipcode) => {
+    const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
+    const api_address = 'https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}';
     
-}
+    axios.get(api_address)
+    .then(response => {
+        const lat = response.data.location.latitude;
+        const lon = response.data.location.longitude;
+        console.log(lat);
+        console.log(lon);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+    return lat , lon ;
+    
+
+};
 
 export const createOptions = (zipcode) => {
     latitude, longitude = convertZipToLatLong(zipcode);
