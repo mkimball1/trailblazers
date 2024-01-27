@@ -64,10 +64,17 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
                    type="number" 
                    id="quantity" 
                    name="quantity"
-                   min="1" 
-                   defaultValue={radius}
+                   min="1"
+                   max="100" 
+                   value={radius}
                    onChange={(e) => {
-                    setRadius(e.target.value)
+                    if(e.target.value > 100){
+                        setRadius(100)
+                    }
+                    else{
+                        setRadius(e.target.value)
+                    }
+                    
                    }}></input>
             <br/>
             <label> Difficulty: </label> <br/>
@@ -80,8 +87,20 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
             <br/>
 
             <button onClick={(e) => {
-            // setZip(getCurrentZip()); // TODO: Get current location & update zipcode
-            submitZipcode(e)
+            e.preventDefault();
+            // TODO: Get current long and lat & update zipcode
+            // Make API call to find lat & long
+            let latitude = 37.5538 //placeholder value
+            let longitude = -122.27 //placeholder value
+            let my_data = {
+                latitude: latitude, 
+                longitude: longitude,
+                radius: radius,
+                difficulty: difficulty
+            }
+            getTrails(my_data).then(response => {
+                setTrailResults(response)
+            })
             }}> Use Current Location </button>
         
             <button onClick={submitZipcode}> SUBMIT </button>
