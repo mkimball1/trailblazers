@@ -22,6 +22,15 @@ export const createOptions = (zipcode) => {
     }
 };
 
+export const getRespone = async (zipcode) => {
+    try {
+        const response = await axios.request(createOptions(zipcode));
+        trailResults = response;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 // }
 //   method: 'GET',
 //   url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
