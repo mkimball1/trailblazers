@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
+import Slideshow from "./Components/slideShow";
 
 function App() {
   const trail1 = {
@@ -29,13 +30,16 @@ function App() {
   }, [zip, trailResults]);
 
   return (
+    <>
+    <Slideshow/>
     <UserInput
       zip={zip}
       setZip={setZip}
       trailResults={trailResults}
-      setTrailResults={setTrailResults}
+      setTrailResults={setTrailResults} 
     />
-  );
+    </> 
+  )
 }
 
 export default App;

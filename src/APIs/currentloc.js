@@ -1,5 +1,3 @@
-
-
 export const getCurrentPosition = (successCallback, errorCallback) => {
     const success = (position) => {
       const latitude = position.coords.latitude;
@@ -17,6 +15,4 @@ export const getCurrentPosition = (successCallback, errorCallback) => {
     navigator.geolocation.getCurrentPosition(success, error);
   };
   
-  // Now you can call this function when you need to get the current position
-//   getCurrentPosition();
 
