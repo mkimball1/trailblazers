@@ -1,6 +1,51 @@
+import 'axios';
+const axios = require('axios');
 export var trailResults = { }
 
-export async function findTrails(zipcode){
+const convertZipToLatLong = (zipcode) => {
+    
+}
+
+export const createOptions = (zipcode) => {
+    latitude, longitude = convertZipToLatLong(zipcode);
+    return {
+        method: 'GET',
+        url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
+        params: {
+            lat: '<REQUIRED>',
+            lon: '<REQUIRED>'
+        },
+        headers: {
+            'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
+            'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
+        }
+    }
+};
+
+// }
+//   method: 'GET',
+//   url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
+//   params: {
+//     lat: '<REQUIRED>',
+//     lon: '<REQUIRED>'
+//   },
+//   headers: {
+//     'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
+//     'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
+//   }
+// };
+
+
+
+// try {
+//     const response = await axios.request(options);
+//     console.log(response.data);
+// } catch (error) {
+//     console.error(error);
+// }
+
+// export async function findTrails(zipcode){
+    // let apiLin = `${}asdf`
     // let matchIDsLink = `${riotBaseMatchHistory}/tft/match/v1/matches/by-puuid/${userIDS.puuid}/ids?api_key=${riotKey}`
     // let response = await fetch(matchIDsLink);
     // response = await response.json()
@@ -32,4 +77,4 @@ export async function findTrails(zipcode){
 
     //     console.log(playerNames)  
     // }
-}
+// }
