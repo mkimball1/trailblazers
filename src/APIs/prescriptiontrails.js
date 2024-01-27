@@ -1,19 +1,21 @@
-import 'axios';
-const axios = require('axios');
+import axios from 'axios';
 export var trailResults = { }
 
-const convertZipToLatLong = (zipcode) => {
+const test_lat = "33.685909"
+const test_long = "-117.824722"
+
+// const convertZipToLatLong = (zipcode) => {
     
-}
+// }
 
 export const createOptions = (zipcode) => {
-    latitude, longitude = convertZipToLatLong(zipcode);
+    // latitude, longitude = convertZipToLatLong(zipcode);
     return {
         method: 'GET',
         url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
         params: {
-            lat: '<REQUIRED>',
-            lon: '<REQUIRED>'
+            lat: test_lat,
+            lon: test_long
         },
         headers: {
             'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
@@ -22,13 +24,16 @@ export const createOptions = (zipcode) => {
     }
 };
 
-export const getRespone = async (zipcode) => {
+export const getResponse = async (zipcode) => {
     try {
+        console.log("Success")
         const response = await axios.request(createOptions(zipcode));
-        trailResults = response;
+        console.log(response.data.data)
+        return response.data.data
     } catch (error) {
         console.error(error);
     }
+    
 };
 
 // }

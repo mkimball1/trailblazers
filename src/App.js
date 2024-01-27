@@ -1,17 +1,27 @@
 import { useState,useEffect } from "react";
-import {trailResults, findTrails} from "./APIs/prescriptiontrails"
+import {getResponse} from "./APIs/prescriptiontrails"
 
 function App() {
   const [zip, setZip] = useState("")
+  const [trailResults, setTrailResults] = useState({})
+
+  // setTrailResults(getResponse(zip))
   
   useEffect(() => {
     // This code runs when `zip` changes
-    console.log(zip);
-  }, [zip]);
+    console.log("RETURN: ");
+    console.log(trailResults);
+  }, [zip, trailResults]);
 
 
   return (
-    <h1> TEST, TEST@louie</h1>
+    <div>
+      <button onClick={() => {
+        setTrailResults(getResponse(zip))
+      }}> CLICK ME </button>
+
+      <h1> TEST, TEST@louie</h1>
+    </div>
   );
 }
 
