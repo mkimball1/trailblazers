@@ -1,38 +1,31 @@
-import axios from 'axios';
+import 'axios';
+const axios = require('axios');
 export var trailResults = { }
 
-const test_lat = "33.685909"
-const test_long = "-117.824722"
+const convertZipToLatLong = async (zipcode) => {
+    const api_address = `https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=0818bd911078f8059a7e1f4387dbf3d8`;
 
-const convertZipToLatLong = (zipcode) => {
-    const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
-    const api_address = 'https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}';
-    
-    axios.get(api_address)
-    .then(response => {
+    try {
+        const response = await axios.get(api_address);
         const lat = response.data.location.latitude;
         const lon = response.data.location.longitude;
         console.log(lat);
         console.log(lon);
-    })
-    .catch(error => {
+        return { lat, lon };
+    } catch (error) {
         console.error(error);
-    });
-
-    return lat , lon ;
-    
-
+        throw error;
+    }
 };
-// f255df9efb841bfe43ab2d741c695756ac4a6cf5
 
-export const createOptions = (zipcode) => {
-    // latitude, longitude = convertZipToLatLong(zipcode);
+export const createOptions = async (zipcode) => {
+    const {latitude, longitude} = await convertZipToLatLong(zipcode);
     return {
         method: 'GET',
         url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
         params: {
-            lat: test_lat,
-            lon: test_long
+            lat: latitude,
+            lon: longitude
         },
         headers: {
             'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
@@ -43,14 +36,12 @@ export const createOptions = (zipcode) => {
 
 export const getResponse = async (zipcode) => {
     try {
-        console.log("Success")
-        const response = await axios.request(createOptions(zipcode));
-        console.log(response.data.data)
-        return response.data.data
+        const options = await createOptions(zipcode);
+        const response = await axios.request(options);
+        trailResults = response.data;
     } catch (error) {
         console.error(error);
     }
-    
 };
 
 // }
