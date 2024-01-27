@@ -5,11 +5,9 @@ function App() {
   const [zip, setZip] = useState("")
   const [trailResults, setTrailResults] = useState({})
 
-  // setTrailResults(getResponse(zip))
-  
   useEffect(() => {
     // This code runs when `zip` changes
-    console.log("RETURN: ");
+    console.log(zip)
     console.log(trailResults);
   }, [zip, trailResults]);
 
@@ -17,8 +15,14 @@ function App() {
   return (
     <div>
       <button onClick={() => {
-        setTrailResults(getResponse(zip))
+        getResponse(zip).then(response => {
+          setTrailResults(response)
+        })
       }}> CLICK ME </button>
+
+      {/* <button onClick={() => {
+        console.log(trailResults)
+      }}> CLICK ME 2</button> */}
 
       <h1> TEST, TEST@louie</h1>
     </div>
