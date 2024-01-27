@@ -1,30 +1,3 @@
-<<<<<<< HEAD
-// import 'axios';
-// const axios = require('axios');
-// // export var trailResults = { }
-
-// const test_lat = "33.685909"
-// const test_long = "-117.824722"
-
-// // const convertZipToLatLong = (zipcode) => {
-    
-// // }
-
-// export const createOptions = (zipcode) => {
-//     // latitude, longitude = convertZipToLatLong(zipcode);
-//     return {
-//         method: 'GET',
-//         url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
-//         params: {
-//             lat: test_lat,
-//             lon: test_long
-//         },
-//         headers: {
-//             'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
-//             'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
-//         }
-//     }
-=======
 import axios from 'axios';
 export var trailResults = { }
 
@@ -90,7 +63,6 @@ export const getResponse = async (zipcode) => {
 //     'X-RapidAPI-Key': '6aacd49bc6mshd729a53f4cd2021p1896ddjsn624706bd7e13',
 //     'X-RapidAPI-Host': 'trailapi-trailapi.p.rapidapi.com'
 //   }
->>>>>>> f42811ac8626f3168fb920735661ab2422d11655
 // };
 
 // export const getTrails = async (zipcode) => {

@@ -1,3 +1,6 @@
+/* NavigationBar.css */
+
+/* Reset some default styles for better consistency */
 body, h1, h2, ul, li {
     margin: 0;
     padding: 0;
@@ -5,11 +8,14 @@ body, h1, h2, ul, li {
   
   /* Style the navigation bar */
   .navbar {
-    height: 64px;
-    background-color: #333;
+    height: 72px;
+    background-color: rgb(12, 80, 12); /* Change background color to green */
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
   }
   
   .navbar ul {
@@ -19,13 +25,24 @@ body, h1, h2, ul, li {
     display: flex;
   }
   
-  .navbar li {
+  .navbar h1 {
     margin: 0 10px;
-    color: white;
-    font-size: 16px;
+    color: black;
+    font-size: 24px;
+    padding: 8px 16px; /* Add padding for the bubble effect */
+    border-radius: 20px; /* Add border-radius for rounded corners */
+    background-color: white; /* Set the background color to white */
+  }
+
+  .navbar button{
+    padding: 14px 16px;
+    font-size: 24px;
+
+    border-radius: 20px; 
+
   }
   
-  .navbar li:hover {
+  .navbar h1:hover {
     text-decoration: underline;
   }
   

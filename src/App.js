@@ -1,9 +1,11 @@
-import { useState,useEffect } from "react";
-import Slideshow from "./Components/slideshow"
+import React, { useState, useEffect } from "react";
+import Slideshow from "./Components/slideshow";
+import { getResponse } from "./APIs/prescriptiontrails";
+import Navigation from "./Components/navigationBar";
 
 function App() {
   const trail1 = {
-    city:  "Irvine",
+    city: "Irvine",
     country: "United States",
     description: "fire road",
     difficulty: "Intermediate",
@@ -18,39 +20,32 @@ function App() {
     region: "California",
     thumbnail: "https://images.singletracks.com/blog/wp-content/uploads/2014/10/2014-10-09095330HDR-orig-scaled.jpg",
     url: "https://www.singletracks.com/bike-trails/west-fork/"
-  }
+  };
+
+  const [zip, setZip] = useState("");
+  const [trailResults, setTrailResults] = useState({});
+
+  useEffect(() => {
+    // This code runs when `zip` changes
+    console.log(zip);
+    console.log(trailResults);
+  }, [zip, trailResults]);
+
   return (
     <div>
       <h1> TEST, TEST@louie</h1>
       <Slideshow name={trail1.city} location={trail1.name} />
-    </div>
-    
-import {getResponse} from "./APIs/prescriptiontrails"
+      <Navigation username={"Username"} load={"Load"} save={"save"} />
 
-function App() {
-  const [zip, setZip] = useState("")
-  const [trailResults, setTrailResults] = useState({})
-
-  useEffect(() => {
-    // This code runs when `zip` changes
-    console.log(zip)
-    console.log(trailResults);
-  }, [zip, trailResults]);
-
-
-  return (
-    <div>
-      <button onClick={() => {
-        getResponse(zip).then(response => {
-          setTrailResults(response)
-        })
-      }}> CLICK ME </button>
-
-      {/* <button onClick={() => {
-        console.log(trailResults)
-      }}> CLICK ME 2</button> */}
-
-      <h1> TEST, TEST@louie</h1>
+      <button
+        onClick={() => {
+          getResponse(zip).then((response) => {
+            setTrailResults(response);
+          });
+        }}
+      >
+        CLICK ME
+      </button>
     </div>
   );
 }
