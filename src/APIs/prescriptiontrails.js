@@ -1,12 +1,9 @@
 import axios from 'axios';
 export var trailResults = { }
 
-const test_lat = "33.685909"
-const test_long = "-117.824722"
-
-// const convertZipToLatLong = (zipcode) => {
+const convertZipToLatLong = (zipcode) => {
     
-// }
+}
 
 export const createOptions = (zipcode) => {
     // latitude, longitude = convertZipToLatLong(zipcode);
