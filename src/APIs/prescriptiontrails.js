@@ -1,9 +1,29 @@
 import axios from 'axios';
 export var trailResults = { }
 
+const test_lat = "33.685909"
+const test_long = "-117.824722"
+
 const convertZipToLatLong = (zipcode) => {
+    const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
+    const api_address = 'https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}';
     
-}
+    axios.get(api_address)
+    .then(response => {
+        const lat = response.data.location.latitude;
+        const lon = response.data.location.longitude;
+        console.log(lat);
+        console.log(lon);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+    return lat , lon ;
+    
+
+};
+// f255df9efb841bfe43ab2d741c695756ac4a6cf5
 
 export const createOptions = (zipcode) => {
     // latitude, longitude = convertZipToLatLong(zipcode);
