@@ -11,18 +11,7 @@ function App() {
 
 
   return (
-   <div>
-    <form onSubmit={(e) => {
-        e.preventDefault();
-        // do stuff
-
-      }}>
-      <input type="text" placeholder="name" onChange={(e) => {
-        setZip(e.target.value)
-      }}/>
-      <input type="submit" value="Submit"/>
-    </form>
-   </div>
+    <h1> TEST, TEST@louie</h1>
   );
 }
 
