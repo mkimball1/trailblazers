@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import { getTrails } from "../APIs/rapidapi"
 import { convertZipToLatLong } from "../APIs/thezipcodes"
+import { getCurrentPosition } from "../APIs/currentloc";
 import "./UserInput.css"
 
 import { Card } from 'antd';
@@ -50,6 +51,26 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
       })
     }
 
+    const useCurrentLocation = (e) => {
+      e.preventDefault();
+      getCurrentPosition((latitude, longitude) => {
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          const my_data = {
+              latitude: latitude,
+              longitude: longitude,
+              radius: radius,
+              difficulty: difficulty
+          };
+
+          getTrails(my_data).then(response => {
+              setTrailResults(response);
+          });
+      }, (error) => {
+          console.error(error);
+  
+      });
+  };
+
     const handleCheckboxes = (event) => {
         setDifficulty({
             ...difficulty,
@@ -57,59 +78,53 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
         });
     };
 
-    const formatter = (value) => `${value} miles`;
-    
     return (
       <div>
-        <Card className="form">
-        <div className="row">
-          <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
-          value={zip}
-          onChange={(e) => {
-              setZip(e.target.value);
-          }}/>
-          <Button className="submitButton" type="primary" icon={<SearchOutlined />}
-          onClick={submitZipcode}>
-            Search
-          </Button>
-          <Button danger className="currentLocation" type="primary" icon={<EnvironmentOutlined/>}
-          onClick={(e) => {
-            e.preventDefault();
-            // TODO: Get current long and lat & update zipcode
-            // Make API call to find lat & long
-            let latitude = 37.5538 //placeholder value
-            let longitude = -122.27 //placeholder value
-            let my_data = {
-                latitude: latitude, 
-                longitude: longitude,
-                radius: radius,
-                difficulty: difficulty
-            }
-            getTrails(my_data).then(response => {
-                setTrailResults(response)
-            })
-            }}
+        <form>
+            <input
+                type="text"
+                placeholder="Enter Zipcode..."
+                value={zip}
+                onChange={(e) => {
+                    setZip(e.target.value);
+                }}
             />
-        </div>
-        
-        <div className="row" style={{height: "30px", paddingTop: "10px"}}>
-          <p> Radius: {radius} miles</p>
-          <Slider className="slider" defaultValue={50} tooltip={{formatter}}
-          onChange={(e) => {
-            setRadius(e)
-          }}
-          />
-        </div>
+            <br/>
+            <label> Search Radius: </label>
+            <input placeholder="Search Radius" 
+                   type="number" 
+                   id="quantity" 
+                   name="quantity"
+                   min="1"
+                   max="100" 
+                   value={radius}
+                   onChange={(e) => {
+                    if(e.target.value > 100){
+                        setRadius(100)
+                    }
+                    else{
+                        setRadius(e.target.value)
+                    }
+                    
+                   }}></input>
+            <br/>
+            <label> Difficulty: </label> <br/>
+            <input type="checkbox" name="Beginner" checked={difficulty.Beginner} onChange={handleCheckboxes}/>
+            <label> Beginner </label><br/>
+            <input type="checkbox" name="Intermediate" checked={difficulty.Intermediate} onChange={handleCheckboxes}/>
+            <label> Intermediate </label><br/>
+            <input type="checkbox" name="Advanced" checked={difficulty.Advanced} onChange={handleCheckboxes}/>
+            <label > Advanced </label>
+            <br/>
 
-        <div className="row" style={{height: "30px"}}>
-          <p> Difficulty: </p>
-        </div>
-        <div className="row">
-          <Checkbox className="checkbox" name="Beginner" checked={difficulty.Beginner} onChange={handleCheckboxes} > Beginner </Checkbox>
-          <Checkbox className="checkbox" name="Intermediate" checked={difficulty.Intermediate} onChange={handleCheckboxes}> Intermediate </Checkbox>
-          <Checkbox className="checkbox" name="Advanced" checked={difficulty.Advanced} onChange={handleCheckboxes}> Advanced </Checkbox>
-        </div>
-        </Card>
+            <button onClick={(e) => {
+            useCurrentLocation(e)
+            }}> Use Current Location </button>
+        
+            <button onClick={submitZipcode}> SUBMIT </button>
+        </form>
+  
+        <h1> TEST, TEST@louie</h1>
       </div>
     );
 }
