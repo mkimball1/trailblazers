@@ -1,0 +1,12 @@
+.container {
+    width: 300px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    background-color: green;
+    box-shadow: 5px 5px 10px orange; /* Adjust the shadow properties as needed */
+    border-radius: 10px; /* Adjust the border-radius to make the corners round */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Add this line to vertically center the text */
+    margin: 20px auto; /* Adjust the margin for positioning */
+    font-family: 'Arial', sans-serif; /* Change the font family */
+  }

@@ -1,0 +1,31 @@
+body, h1, h2, ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style the navigation bar */
+  .navbar {
+    height: 64px;
+    background-color: #333;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .navbar li {
+    margin: 0 10px;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .navbar li:hover {
+    text-decoration: underline;
+  }
+  
