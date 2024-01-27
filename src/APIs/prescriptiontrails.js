@@ -2,11 +2,19 @@ import axios from 'axios';
 export const convertZipToLatLong = async (zipcode) => {
     const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
     const api_address = `https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}`;
-    
-    let response = await fetch(api_address);
-    response = await response.json()
 
-    return {latitude: response.location[3].latitude, longitude: response.location[3].longitude}
+    let latitude, longitude;
+    try {
+        let response = await fetch(api_address);
+        response = await response.json()
+        latitude = response.location.find(obj => obj['country'] === 'US').latitude;
+        longitude = response.location.find(obj => obj['country'] === 'US').longitude;
+    } catch(error) {
+        console.log(error)
+        throw(error)
+    }
+
+    return {latitude: latitude, longitude: longitude}
 };
 
 // f255df9efb841bfe43ab2d741c695756ac4a6cf5
@@ -15,6 +23,7 @@ export const createOptions = (zipcode) => {
     let latitude = "";
     let longitude = "";
     let data = convertZipToLatLong(zipcode).then(my_data => {
+        console.log('test')
         console.log(my_data);
         latitude = my_data.latitude
         longitude = my_data.longitude;
@@ -36,9 +45,9 @@ export const createOptions = (zipcode) => {
 
 export const getResponse = async (zipcode) => {
     try {
-        console.log("Success")
         let response = await axios.request(createOptions(zipcode));
-        response = response.data.data
+        response = response.data.data;
+        console.log("Success");
         return response
     } catch (error) {
         console.error(error);
