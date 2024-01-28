@@ -26,7 +26,7 @@ function App() {
     <div style={{
       margin: "0px",
       backgroundImage: `url(${backgroundImg})`, // Using template literals
-      height: "100vh", // Full height
+      // height: "100vh", // Full height
       backgroundPosition: "center", // Center the image
       backgroundRepeat: "repeat", // Do not repeat the image
       backgroundSize: "cover" // Resize the background image to cover the entire container
@@ -37,6 +37,7 @@ function App() {
         likedTrails={likedTrails}
         setLikedTrails={setLikedTrails}
       />
+
       <UserInput
         zip={zip}
         setZip={setZip}

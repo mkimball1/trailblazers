@@ -19,7 +19,7 @@ export function updateLikedTrails(trailSelected, likedTrails, setLikedTrails){
 export const LikedTrailsHeader = () => {
     return (
         <div className="header">
-            <div> LIKED TRAILS </div>
+            <h1> LIKED TRAILS </h1>
         </div>
     )
 }

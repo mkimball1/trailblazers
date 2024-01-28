@@ -6,6 +6,7 @@
     background-color: #fff; /* Set a background color that contrasts the lines */
 }
 
+<<<<<<< HEAD
 .header .horizontal-line {
     flex-grow: 1; /* Lines will grow to take up available space */
     border-top: 1px solid #000; /* Creates a top border with contrast */
@@ -17,6 +18,12 @@
     flex-shrink: 0; /* Prevent the text from shrinking */
     padding: 0 10px; /* Add some padding around the text */
     background: transparent;
+=======
+.header h1 {
+    color: beige;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-decoration: underline;
+>>>>>>> b547730e9632a27d4c948e705c7ad29dc39a2765
 }
 
 .liked-container {
