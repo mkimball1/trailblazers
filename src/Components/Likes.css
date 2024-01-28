@@ -3,7 +3,7 @@
     width: 100%;
     align-items: center; /* Align items vertically */
     justify-content: center; /* Center align items horizontally */
-    background-color: #fff; /* Set a background color that contrasts the lines */
+    background-color: none; /* Set a background color that contrasts the lines */
 }
 
 .header .horizontal-line {

@@ -41,23 +41,51 @@ export function FormExample({username, setUsername, likedTrails, setLikedTrails}
             />
           </Col>
           <Col>
-            <Button onClick={()=> {
+            <Button onClick={async ()=> {
               let data = {
                 username: username,
                 likedTrails: likedTrails
-              }
+              };
+              
+              let users = await getUsers();
+              console.log(users);
 
-              updateUser("Test2", {data: "woopie"})
-              // getUsers(data)
-              // createUser(data)
+              //CHECK IF THE USERNAME IS IN THE DATABASE
+              const foundUser = users.find(user => user.name === username);
+              console.log(foundUser);
 
+              //IF IT DOES, UPDATE USER
+                // updateUser(username, data);
+              //ELSE, CREATE NEW USER
+                // createUser(data);
             }} className='save-button' > Save </Button>
-            <Button onClick={() => {
 
-            }}className="load-button"> Load </Button>
+            <Button className="load-button"
+            onClick={async () => {
+                let data = {
+                  username: username,
+                  likedTrails: likedTrails
+                }
+
+                let users = await getUsers();
+                console.log(users);
+
+                //CHECK IF THE USERNAME IS IN THE DATABASE
+                const foundUser = users.find(user => user.name === username);
+                console.log(foundUser);
+
+                //IF IT DOES, UPDATE USERNAME & LIKED TRAILS
+                setLikedTrails(users[username])
+                //ELSE, DO NOTHING
+
+                
+                
+            }}> Load </Button>
           </Col>
         </Row>
       </Form>
     </Navbar>
   );
 }
+
+// Trailblazer is a Full-stack webapplication built to find bike trails around a specified area. We utilize multiple public datasets and apis, host the frontend in React and user information in MongoDB cloud Storage.
