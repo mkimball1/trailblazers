@@ -45,15 +45,12 @@ export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
         "thumbnail": null
     }
 
-    useEffect(() => {
-        console.log(likedTrails)
-    }, [likedTrails]);
     return (
         <>
-            {/* <button onClick={() => {console.log(likedTrails)}}> click me </button> */}
             <button onClick={() => {
                 updateLikedHikes(newTrail, likedTrails, setLikedTrails)
             }}> Toggle Like </button>
+            
             {Object.values(likedTrails).map((trail, index) => (
                 //Need to replace with Slides
                 <div key={index}>
