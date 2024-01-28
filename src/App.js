@@ -1,9 +1,9 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
-import SlideShow from "./Components/slideShow";
+import SlideShow from "./Components/SlideShow.js";
 
 //change 
-import initMap from "./APIs/googlemaps.js";
+import MyComponent from "./APIs/googlemaps.js";
 
 function App() {
   const trail1 = {
@@ -34,6 +34,11 @@ function App() {
   }, [zip, trailResults, likeStore]);
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+  const coordinates = {
+    latitude: 37.554947,
+    longitude: -122.271057
+  }
+  // console.log(coordinates)
 
   return (
     <>
@@ -46,6 +51,8 @@ function App() {
       // likeResultes={setLikes}
     />
     <SlideShow slides={colors}/>
+
+    <MyComponent coordinates = {coordinates}/>
     </> 
   )
 }

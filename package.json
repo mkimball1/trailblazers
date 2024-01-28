@@ -6,6 +6,8 @@
     "@ant-design/icons": "^5.2.6",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@googlemaps/markerclusterer": "^2.5.2",
+    "@googlemaps/markerwithlabel": "^2.0.27",
+    "@react-google-maps/api": "^2.19.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
