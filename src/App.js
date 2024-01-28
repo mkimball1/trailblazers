@@ -1,6 +1,10 @@
 import { useState,useEffect } from "react";
 import Slideshow from "./Components/slideshow";
 import UserInput from "./Components/UserInput";
+import SlideShow from "./Components/slideShow.js";
+
+//change 
+import initMap from "./APIs/googlemaps.js";
 
 function App() {
   const trail1 = {
@@ -12,11 +16,11 @@ function App() {
     features: "",
     id: 279268, //
     lat: "33.65656",
-    length: "1.0", //
+    length: "1.0", 
     lon: "-117.80883", 
-    name: "West Fork", //
-    rating: 2, //
-    region: "California", //
+    name: "West Fork",
+    rating: 2, 
+    region: "California", 
     thumbnail: "https://images.singletracks.com/blog/wp-content/uploads/2014/10/2014-10-09095330HDR-orig-scaled.jpg",//
     url: "https://www.singletracks.com/bike-trails/west-fork/"
   };
@@ -29,14 +33,19 @@ function App() {
     console.log(trailResults)
   }, [zip, trailResults]);
 
+  const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+
   return (
-    <><UserInput
+    <>
+    <UserInput
       zip={zip}
       setZip={setZip}
       trailResults={trailResults}
-      setTrailResults={setTrailResults} /><Slideshow /></>
-
-  );
+      setTrailResults={setTrailResults} 
+    />
+    <SlideShow slides={colors}/>
+    </> 
+  )
 }
 
 export default App;

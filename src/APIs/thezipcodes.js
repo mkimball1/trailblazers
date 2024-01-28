@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const convertZipToLatLong = async (zipcode) => {
     const api_key = '0818bd911078f8059a7e1f4387dbf3d8';
     const api_address = `https://thezipcodes.com/api/v1/search?zipCode=${zipcode}&apiKey=${api_key}`;

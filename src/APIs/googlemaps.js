@@ -1,23 +1,35 @@
+import { Loader } from "@googlemaps/js-api-loader"
 let map;
 
+const loader = new Loader({
+    apiKey: "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY",
+    version: "weekly"
+});
+
 async function initMap(location, name) {
+  try {
+    // Load the Google Maps API
+    await loader.load();
 
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    // Access the loaded libraries
+    const { google } = loader;
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 4,
-    center: location,
-    mapId: "MAP-ID",
-  });
+    // Create the map
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: location,
+      mapId: "MAP-ID",
+    });
 
-  // The marker, positioned at Uluruxx
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: location,
-    title: name,
-  });
+    // Create a marker
+    const marker = new google.maps.Marker({
+      map: map,
+      position: location,
+      title: name,
+    });
+  } catch (error) {
+    console.error("Error loading Google Maps API:", error);
+  }
 }
+
+export default initMap;

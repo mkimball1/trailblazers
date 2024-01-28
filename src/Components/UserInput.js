@@ -1,7 +1,18 @@
-import { useState,useEffect } from "react";
-import { getTrails } from "../APIs/rapidapi"
-import { convertZipToLatLong } from "../APIs/thezipcodes"
-import "./UserInput.css"
+// React-related imports
+import { useEffect, useState } from "react";
+
+// Project-specific APIs
+import { getCurrentPosition } from "../APIs/currentloc";
+import { getTrails } from "../APIs/rapidapi";
+import { convertZipToLatLong } from "../APIs/thezipcodes";
+import {loader} from "../APIs/googlemaps"
+// Stylesheet
+import "./UserInput.css";
+
+// External libraries or frameworks
+import { Button, Card, Checkbox, Input, Slider } from 'antd';
+import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
+
 
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const [radius, setRadius] = useState(25)
@@ -12,8 +23,6 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     })
 
     useEffect(() => {
-    //   console.log(radius)
-    //   console.log(difficulty)
     }, [radius, difficulty]);
   
     const submitZipcode = (e) => {
@@ -47,66 +56,61 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
         });
     };
 
+    const formatter = (value) => `${value} miles`;
+    
     return (
       <div>
-        <form>
-            <input
-                type="text"
-                placeholder="Enter Zipcode..."
-                value={zip}
-                onChange={(e) => {
-                    setZip(e.target.value);
-                }}
-            />
-            <br/>
-            <label> Search Radius: </label>
-            <input placeholder="Search Radius" 
-                   type="number" 
-                   id="quantity" 
-                   name="quantity"
-                   min="1"
-                   max="100" 
-                   value={radius}
-                   onChange={(e) => {
-                    if(e.target.value > 100){
-                        setRadius(100)
-                    }
-                    else{
-                        setRadius(e.target.value)
-                    }
-                    
-                   }}></input>
-            <br/>
-            <label> Difficulty: </label> <br/>
-            <input type="checkbox" name="Beginner" checked={difficulty.Beginner} onChange={handleCheckboxes}/>
-            <label> Beginner </label><br/>
-            <input type="checkbox" name="Intermediate" checked={difficulty.Intermediate} onChange={handleCheckboxes}/>
-            <label> Intermediate </label><br/>
-            <input type="checkbox" name="Advanced" checked={difficulty.Advanced} onChange={handleCheckboxes}/>
-            <label > Advanced </label>
-            <br/>
-
-            <button onClick={(e) => {
+        <Card className="form">
+        <div className="row">
+          <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
+          value={zip}
+          onChange={(e) => {
+              setZip(e.target.value);
+          }}/>
+          <Button className="submitButton" type="primary" icon={<SearchOutlined />}
+          onClick={submitZipcode}>
+            Search
+          </Button>
+          <Button danger className="currentLocation" type="primary" icon={<EnvironmentOutlined/>}
+          onClick={(e) => {
             e.preventDefault();
-            // TODO: Get current long and lat & update zipcode
-            // Make API call to find lat & long
-            let latitude = 37.5538 //placeholder value
-            let longitude = -122.27 //placeholder value
-            let my_data = {
-                latitude: latitude, 
-                longitude: longitude,
-                radius: radius,
-                difficulty: difficulty
-            }
-            getTrails(my_data).then(response => {
-                setTrailResults(response)
-            })
-            }}> Use Current Location </button>
+            getCurrentPosition((latitude, longitude) => {
+                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                const my_data = {
+                    latitude: latitude,
+                    longitude: longitude,
+                    radius: radius,
+                    difficulty: difficulty
+                };
+
+                getTrails(my_data).then(response => {
+                    setTrailResults(response);
+                });
+            }, (error) => {
+                console.error(error);
+            });
+            }}
+            />
+        </div>
         
-            <button onClick={submitZipcode}> SUBMIT </button>
-        </form>
-  
-        <h1> TEST, TEST@louie</h1>
+        <div className="row" style={{height: "30px", paddingTop: "10px"}}>
+          <p> Radius: {radius} miles</p>
+          <Slider className="slider" defaultValue={50} tooltip={{formatter}}
+          onChange={(e) => {
+            setRadius(e)
+          }}
+          />
+        </div>
+
+        <div className="row" style={{height: "30px"}}>
+          <p> Difficulty: </p>
+        </div>
+        <div className="row">
+          <Checkbox className="checkbox" name="Beginner" checked={difficulty.Beginner} onChange={handleCheckboxes} > Beginner </Checkbox>
+          <Checkbox className="checkbox" name="Intermediate" checked={difficulty.Intermediate} onChange={handleCheckboxes}> Intermediate </Checkbox>
+          <Checkbox className="checkbox" name="Advanced" checked={difficulty.Advanced} onChange={handleCheckboxes}> Advanced </Checkbox>
+        </div>
+        </Card>
       </div>
     );
 }
