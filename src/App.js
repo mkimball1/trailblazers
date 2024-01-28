@@ -26,11 +26,12 @@ function App() {
 
   const [zip, setZip] = useState("");
   const [trailResults, setTrailResults] = useState({});
+  const [likeStore, setLikes] = useState({});
 
   useEffect(() => {
     console.log(zip)
     console.log(trailResults)
-  }, [zip, trailResults]);
+  }, [zip, trailResults, likeStore]);
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28"];
   const coordinates = {
@@ -45,7 +46,9 @@ function App() {
       zip={zip}
       setZip={setZip}
       trailResults={trailResults}
-      setTrailResults={setTrailResults} 
+      setTrailResults={setTrailResults}
+      // likes={likeStore}
+      // likeResultes={setLikes}
     />
     <SlideShow slides={colors}/>
 
