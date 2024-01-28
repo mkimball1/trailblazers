@@ -3,7 +3,7 @@
     width: 100%;
     align-items: center; /* Align items vertically */
     justify-content: center; /* Center align items horizontally */
-    background-color: #fff; /* Set a background color that contrasts the lines */
+    background: transparent;; /* Set a background color that contrasts the lines */
 }
 
 .header .horizontal-line {
@@ -32,7 +32,7 @@
     margin: auto;
     margin-top: 80px;
 }
-  
+
 .liked-row {
     display: flex;
     margin-bottom: 10px; /* Adjust as needed for spacing between rows */
