@@ -3,6 +3,7 @@ import {updateLikedTrails} from "./Likes.js"
 import "./SlideShow.css"
 import { Button} from 'antd';
 import TrailSlide from "./Slide.js";
+import { ToastContainer, toast } from "react-toastify";
 
 function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   console.log(trailResults)
@@ -29,6 +30,7 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   return (
     <div>
       {slides[currentIndex]}
+      <ToastContainer />
       <div className="container">
         <Button className="button" onClick={() => {goToPreviousComponent()}}> Prev </Button>
         
@@ -36,10 +38,12 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
         {likedTrails.hasOwnProperty(slides[currentIndex].key) ? 
         <Button className="like" type="primary" danger onClick={() => {
           updateLikedTrails(trailResults[currentIndex], likedTrails, setLikedTrails)
+          toast.success("Item disliked!")
         }}> Dislike </Button>
         : 
         <Button className="like" type="primary" onClick={() => {
           updateLikedTrails(trailResults[currentIndex], likedTrails, setLikedTrails)
+          toast.success("Item liked!")
         }}> Like </Button>
         }
         <Button className="button" onClick={() => {goToNextComponent()}}> Next </Button>

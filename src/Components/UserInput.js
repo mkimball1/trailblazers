@@ -15,7 +15,7 @@ import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-let notify = ToastContainer;
+
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const [radius, setRadius] = useState(50)
     const [difficulty, setDifficulty] = useState({
