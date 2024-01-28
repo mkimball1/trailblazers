@@ -30,23 +30,19 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
     <div>
       {slides[currentIndex]}
       <div className="container">
-        <Button onClick={() => {goToPreviousComponent()}}> Prev </Button>
+        <Button className="button" onClick={() => {goToPreviousComponent()}}> Prev </Button>
         
 
         {likedTrails.hasOwnProperty(slides[currentIndex].key) ? 
-        <Button type="primary" danger onClick={() => {
+        <Button className="like" type="primary" danger onClick={() => {
           updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
         }}> Dislike </Button>
         : 
-        <Button type="primary" onClick={() => {
+        <Button className="like" type="primary" onClick={() => {
           updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
         }}> Like </Button>
         }
-
-
-        
-
-        <Button onClick={() => {goToNextComponent()}}> Next </Button>
+        <Button className="button" onClick={() => {goToNextComponent()}}> Next </Button>
       </div>
       
     </div>

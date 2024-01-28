@@ -43,9 +43,19 @@
 
 
   .container {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;           /* Enable Flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .container .button{
+    width: 30%;
+    margin: auto;
+  }
+
+  .container .like{
+    width: 20%;
+    margin: auto;
   }
