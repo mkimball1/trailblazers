@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
-import SlideShow from "./Components/SlideShow.js";
+import SlideShow from "./Components/slideShow.js";
 
 //change 
 import initMap from "./APIs/googlemaps.js";
