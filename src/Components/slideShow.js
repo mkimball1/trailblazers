@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
 
 import { Button} from 'antd';
-import TrailSlide from "./Slide";
+import TrailSlide from "./Slide.js";
 
 function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   console.log(trailResults)

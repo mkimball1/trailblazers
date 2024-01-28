@@ -1,8 +1,9 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
 import SlideShow from "./Components/SlideShow.js";
+
+//change 
 import {UserLikedHikes, LikedHikesHeader} from "./Components/Likes.js"
-import {TrailSlide} from "./Components/Slide.js"
 
 function App() {
   const trail1 = {

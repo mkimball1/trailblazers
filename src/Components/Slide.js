@@ -7,7 +7,7 @@ import { Button, Checkbox, Input, Slider } from 'antd';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
-import MyComponent from "../APIs/googlemaps.js";
+import MyMap from "../APIs/googlemaps.js";
 
 export function TrailSlide(trail) {
     trail = trail.trail
@@ -62,7 +62,7 @@ export function TrailSlide(trail) {
                     <Offcanvas.Title>Google Map View</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <MyComponent coordinates = {coordinates}/>
+                        <MyMap coordinates = {coordinates}/>
                     </Offcanvas.Body>
                 </Offcanvas>
             </>
