@@ -12,3 +12,10 @@ img {
     align-items: baseline;
   }
 
+.save-button {
+    margin-right: 5px; /* Adjust the value to add more or less space */
+}
+
+.load-button {
+    margin-left: 5px; /* Adjust the value to add more or less space */
+}

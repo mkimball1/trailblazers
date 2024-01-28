@@ -31,23 +31,33 @@ export const LikedHikesHeader = () => {
 export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
     const likedTrailsArray = Object.values(likedTrails);
   
+    // Function to chunk an array into rows of a specific size
+    const chunkArray = (arr, size) => {
+      const result = [];
+      for (let i = 0; i < arr.length; i += size) {
+        result.push(arr.slice(i, i + size));
+      }
+      return result;
+    };
+  
+    // Organize liked trails into rows of three
+    const rows = chunkArray(likedTrailsArray, 3);
+  
     return (
-        <>
-        <div className="container">
-            {Object.values(likedTrails).map((trail, index) => (
-                <div>
-                    <TrailSlide key={index} trail={trail}/>
+      <>
+        <div className="liked-container">
+          {rows.map((row, rowIndex) => (
+            <div className="liked-row" key={rowIndex}>
+              {row.map((trail, index) => (
+                <div key={index}>
+                  <TrailSlide trail={trail} showPhoto={false} />
                 </div>
-                
-            ))}
-        </div>
-
-            <div style={{display: "flex"}}>
-                <p style={{width: "30%"}}> 1 </p>
-                <p style={{width: "30%"}}> 2 </p>
-                <p style={{width: "30%"}}> 3 </p>
+              ))}
             </div>
-        </>
+          ))}
+        </div>
+      </>
     );
   };
+  
   

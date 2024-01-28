@@ -17,7 +17,15 @@
     padding: 0 10px; /* Add some padding around the text */
 }
 
-.container {
+.liked-container {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+    margin-top: 80px;
+}
+  
+.liked-row {
+    display: flex;
+    margin-bottom: 10px; /* Adjust as needed for spacing between rows */
 }

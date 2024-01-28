@@ -27,8 +27,8 @@ export function FormExample() {
             />
           </Col>
           <Col>
-            <Button type="submit"> Save </Button>
-            <Button type="submit"> Load </Button>
+            <Button className='save-button' > Save </Button>
+            <Button className="load-button"> Load </Button>
           </Col>
         </Row>
       </Form>

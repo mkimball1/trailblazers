@@ -1,5 +1,8 @@
 .form {
-    width: 80%;
+    width: 50%;
+    margin: 0 auto; /* Add margin: 0 auto; to center horizontally */
+    display: flex; /* Use flex container */
+    flex-direction: column; /* Align items vertically */
 }
 
 .form .row {
@@ -11,8 +14,10 @@
 
 .form .zipInput{
     height: 10%;
-    width: 65%;
-    margin-right: 2% ;
+    width: 100%;
+    margin-right: 2%;
+    padding: 10px;
+    margin-bottom: 1%;
 }
 
 .form .submitButton {
@@ -38,5 +43,15 @@
 }
 
 .form .row .checkbox {
+    display: flex;
+    align-items: center;
     margin-right: 20px;
+}
+
+.form .row .checkbox label {
+    margin: 0;
+}
+
+.form .row .checkbox input {
+    margin-right: 5px;
 }

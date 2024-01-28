@@ -27,7 +27,6 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const submitZipcode = (e) => {
       e.preventDefault();
       convertZipToLatLong(zip).then(data => {
-        // console.log("HELLO: ", data)
         if (data){
           let my_data = {
             latitude: data.latitude,
@@ -66,15 +65,14 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
           onChange={(e) => {
               setZip(e.target.value);
           }}/>
-          <Button className="submitButton" type="primary" icon={<SearchOutlined />}
+          <Button className="submitButton" type="primary" icon={<SearchOutlined />} 
           onClick={submitZipcode}>
-            Search
+          Search
           </Button>
           <Button danger className="currentLocation" type="primary" icon={<EnvironmentOutlined/>}
           onClick={(e) => {
             e.preventDefault();
             getCurrentPosition((latitude, longitude) => {
-                // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
                 const my_data = {
                     latitude: latitude,
                     longitude: longitude,
