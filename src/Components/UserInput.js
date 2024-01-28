@@ -57,8 +57,8 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const formatter = (value) => `${value} miles`;
     
     return (
-      <div>
-        <Card className="form">
+      <div style={{margin: "50px"}}>
+        <Card  className="form">
         <div className="row">
           <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
           value={zip}

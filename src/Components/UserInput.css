@@ -1,8 +1,9 @@
 .form {
-    width: 50%;
+    width: 70%;
     margin: 0 auto; /* Add margin: 0 auto; to center horizontally */
     display: flex; /* Use flex container */
     flex-direction: column; /* Align items vertically */
+    box-shadow: 0px 5px 50px 5px rgba(0, 0, 0, 0.4);
 }
 
 .form .row {

@@ -22,7 +22,7 @@ export function FormExample({username, setUsername, likedTrails, setLikedTrails}
   },[username])
 
   return (
-    <Navbar bg="light">
+    <Navbar bg="light" className="full-width-navbar">
       <Form inline>
         <Row className="baseline-align">
           <Col>
