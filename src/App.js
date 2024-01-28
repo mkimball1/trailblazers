@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
 import SlideShow from "./Components/SlideShow.js";
+import { FormExample } from "./Components/Navbar.js"
 
 //change 
 import {UserLikedHikes, LikedHikesHeader} from "./Components/Likes.js"
@@ -62,6 +63,7 @@ function App() {
 
   return (
     <>
+    <FormExample/>
     <UserInput
       zip={zip}
       setZip={setZip}

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import "./Likes.css"
+import { Slider } from "antd";
+import {TrailSlide} from "./Slide"
 
 export function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
     const id = trailSelected.id; // Make sure trailSelected and its id are defined and passed to this function
@@ -29,12 +31,21 @@ export const LikedHikesHeader = () => {
 export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
     return (
         <>
+        <div className="container">
             {Object.values(likedTrails).map((trail, index) => (
-                //Need to replace with Slides
-                <div key={index}>
-                    <h2>{trail.name}</h2>
+                <div>
+                    <TrailSlide key={index} trail={trail}/>
                 </div>
+                
             ))}
+        </div>
+            
+
+            <div style={{display: "flex"}}>
+                <p style={{width: "30%"}}> 1 </p>
+                <p style={{width: "30%"}}> 2 </p>
+                <p style={{width: "30%"}}> 3 </p>
+            </div>
         </>
     );
 };
