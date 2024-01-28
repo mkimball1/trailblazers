@@ -1,0 +1,17 @@
+.trailSlide {
+    position: relative;
+    margin: auto;
+    width: 80%;
+    box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.08);
+}
+
+.trailSlide .thumbnail {
+    position: absolute;
+    top: -20px;
+    left: 43vw; /* Align to the right of the container */
+    width: 300px; /* Already set */
+}
+
+.map{
+    margin-right: 10px;
+}

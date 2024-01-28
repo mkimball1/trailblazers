@@ -1,39 +1,46 @@
 import { useState,useEffect } from "react";
+import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
+
+// import {TrailSlide} from "./Components/Slide.js"
 import { Button} from 'antd';
+import TrailSlide from "./Slide";
 
-function SlideShow(slides) {
-  slides = slides.slides
+function SlideShow(trailResults, likedTrails, setLikedTrails) {
+  console.log(trailResults, likedTrails, setLikedTrails)
+  trailResults = trailResults.trailResults
+  // console.log(trailResults)
+
   const [index, setIndex] = useState(0);
-  const [currSlide, setCurrSlide] = useState(
-    // Tentative
-    slides[0]
-  )
+  const slides = trailResults ? Object.values(trailResults).map(traildata => 
+    <TrailSlide key={traildata.id} trail={traildata} />
+  ) : [];
 
-  const changeCurrSlide = (move) => {
-    let newIndex = index+move
-    if(newIndex < 0){
-      //tentative
-      setIndex(slides.length-1)
-    } 
-    else if (newIndex >= slides.length){
-      setIndex(0)
-    }
-    else{
-      setIndex(newIndex)
-    }
-  }
+  // Then, initialize the currSlide state
+  const [currSlide, setCurrSlide] = useState(slides[0]);
+  console.log("MY SLIDES:", slides)
 
-  useEffect(() => {
-    // tentative
-    setCurrSlide(slides[index])
-    console.log(index, slides)
-  }, [index])
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const goToNextComponent = () => {
+    setCurrentIndex(prevIndex => (prevIndex + 1) % slides.length);
+  };
+
+  // Function to go to the previous component
+  const goToPreviousComponent = () => {
+      setCurrentIndex(prevIndex => (prevIndex - 1 + slides.length) % slides.length);
+  };
+
+  useEffect( () => {
+    console.log(slides[currentIndex])
+  }, [currentIndex])
 
   return (
     <div>
-      <p> {currSlide} </p>
-      <Button onClick={() => {changeCurrSlide(-1)}}> Prev </Button>
-      <Button onClick={() => {changeCurrSlide(1)}}> Next </Button>
+      {slides[currentIndex]}
+      <Button onClick={() => {goToPreviousComponent()}}> Prev </Button>
+      <button onClick={() => {
+        updateLikedHikes(slides[currentIndex], likedTrails, setLikedTrails)
+      }}> I LIKE </button>
+      <Button onClick={() => {goToNextComponent()}}> Next </Button>
     </div>
   );
 }
