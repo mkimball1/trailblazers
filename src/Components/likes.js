@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./Likes.css"
-import { TrailSlide } from "./Slide";
-
+import { Slider } from "antd";
+import {TrailSlide} from "./Slide"
 
 export function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
     const id = trailSelected.id; // Make sure trailSelected and its id are defined and passed to this function
@@ -32,21 +32,22 @@ export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
     const likedTrailsArray = Object.values(likedTrails);
   
     return (
-      <div className="liked-slides-container">
-        {likedTrailsArray.reduce((rows, slide, index) => {
-          if (index % 3 === 0) rows.push([]);
-          rows[rows.length - 1].push(
-            <div className="liked-slide" key={index}>
-              <TrailSlide trail={slide} />
+        <>
+        <div className="container">
+            {Object.values(likedTrails).map((trail, index) => (
+                <div>
+                    <TrailSlide key={index} trail={trail}/>
+                </div>
+                
+            ))}
+        </div>
+
+            <div style={{display: "flex"}}>
+                <p style={{width: "30%"}}> 1 </p>
+                <p style={{width: "30%"}}> 2 </p>
+                <p style={{width: "30%"}}> 3 </p>
             </div>
-          );
-          return rows;
-        }, []).map((row, index) => (
-          <div className="liked-slides-row" key={index}>
-            {row}
-          </div>
-        ))}
-      </div>
+        </>
     );
   };
   

@@ -1,0 +1,14 @@
+img {
+    margin-left: 15px;
+    height: 100px;
+}
+
+.textlogo {
+    height: 50px;
+}
+
+.baseline-align {
+    display: flex;
+    align-items: baseline;
+  }
+

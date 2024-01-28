@@ -24,11 +24,11 @@ export function TrailSlide(trail) {
         <Card className="trailSlide">
             <div className="container">
                 <div class="half" > 
-                    <h1> {trail.name} </h1>
-                    <h2> {trail.city}, {trail.region} </h2>
-                    <h3> Difficulty: {trail.difficulty ? trail.difficulty : "N/A"} </h3>
-                    <h3> Length: {trail.length!="0.0" ? `${trail.length} miles`: "N/A" } </h3>
-                    <h3> Rating: {trail.rating ? Array.from({ length: trail.rating }).map((_, index) => (
+                    <h1 className="name"> {trail.name} </h1>
+                    <h2 className="name"> {trail.city}, {trail.region} </h2>
+                    <h3 className="name"> Difficulty: {trail.difficulty ? trail.difficulty : "N/A"} </h3>
+                    <h3 className="name"> Length: {trail.length!="0.0" ? `${trail.length} miles`: "N/A" } </h3>
+                    <h3 className="name"> Rating: {trail.rating ? Array.from({ length: trail.rating }).map((_, index) => (
                         <StarTwoTone style={{ marginLeft: '1px' }} /> 
                     )) : "N/A"}  </h3>
 
@@ -47,6 +47,7 @@ export function TrailSlide(trail) {
                     </div>
                 </div>
                 <div class="half" > 
+
                     {trail.thumbnail ? <Image
                         className="thumbnail"
                         src={trail.thumbnail}
@@ -71,9 +72,7 @@ export function TrailSlide(trail) {
                     </Offcanvas.Body>
                 </Offcanvas>
             </>
-            
         </Card>
-        // <div> HELLO HELLO HELLO </div>
     )
 
     
