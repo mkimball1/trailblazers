@@ -14,12 +14,13 @@ function App() {
   const [trailResults, setTrailResults] = useState({});
   const [likedTrails, setLikedTrails] = useState({});
 
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState("");
 
-  // console.log(likedTrails)
   useEffect(() => {
-
-  }, [zip, trailResults, likedTrails]);
+    console.log(username)
+    console.log(likedTrails)
+    console.log(trailResults)
+  }, [username, likedTrails]);
 
   return (
     <div style={{
@@ -27,7 +28,7 @@ function App() {
       backgroundImage: `url(${backgroundImg})`, // Using template literals
       height: "100vh", // Full height
       backgroundPosition: "center", // Center the image
-      backgroundRepeat: "no-repeat", // Do not repeat the image
+      backgroundRepeat: "repeat", // Do not repeat the image
       backgroundSize: "cover" // Resize the background image to cover the entire container
     }}>
       <NaviBar 
