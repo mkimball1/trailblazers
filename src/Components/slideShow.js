@@ -8,7 +8,7 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   console.log(trailResults)
 
   const slides = trailResults ? Object.values(trailResults).map(traildata => 
-    <TrailSlide key={traildata.id} trail={traildata} />
+    <TrailSlide trail={traildata} />
   ) : [];
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,8 +23,6 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
     // Optionally render something else or nothing if there are no slides
     return null; // or return <SomeOtherComponent /> or any JSX you prefer
 }
-  console.log("liked trails: ", likedTrails)
-  console.log("curr trail: ", slides[currentIndex].key)
 
   return (
     <div>
