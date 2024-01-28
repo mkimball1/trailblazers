@@ -9,7 +9,7 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   console.log(trailResults)
 
   const slides = trailResults ? Object.values(trailResults).map(traildata => 
-    <TrailSlide trail={traildata} />
+    <TrailSlide key={traildata.id} trail={traildata} />
   ) : [];
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,17 +21,17 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
   };
 
   if (slides.length === 0) {
-    // Optionally render something else or nothing if there are no slides
-    return null; // or return <SomeOtherComponent /> or any JSX you prefer
-}
+    return null; 
+  }
 
   return (
     <div>
       {slides[currentIndex]}
       <div className="container">
-        <Button className="button" onClick={() => {goToPreviousComponent()}}> Prev </Button>
-        
-
+        <Button className="button" onClick={() => {
+          console.log(likedTrails)
+          goToPreviousComponent()
+          }}> Prev </Button>
         {likedTrails.hasOwnProperty(slides[currentIndex].key) ? 
         <Button className="like" type="primary" danger onClick={() => {
           updateLikedTrails(trailResults[currentIndex], likedTrails, setLikedTrails)
