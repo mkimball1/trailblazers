@@ -28,7 +28,6 @@ function MyComponent({coordinates}) {
 
   React.useEffect(() => {
     if (isLoaded && map) {
-      // Now you can safely use the google object
       const newMarker = new MarkerWithLabel({
         position: new window.google.maps.LatLng(49.475, -123.84),
         clickable: true,
@@ -39,8 +38,12 @@ function MyComponent({coordinates}) {
         labelClass: "labels",
         labelStyle: { opacity: 1.0 },
       });
-
+  
       setMarker(newMarker);
+  
+      return () => {
+        newMarker.setMap(null); // Remove the marker from the map on cleanup
+      };
     }
   }, [isLoaded, map]);
 
