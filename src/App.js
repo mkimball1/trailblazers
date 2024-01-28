@@ -2,9 +2,7 @@ import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
 import SlideShow from "./Components/SlideShow.js";
 import {UserLikedHikes, LikedHikesHeader} from "./Components/Likes.js"
-
-//change 
-import MyComponent from "./APIs/googlemaps.js";
+import {TrailSlide} from "./Components/Slide.js"
 
 function App() {
   const trail1 = {
@@ -48,6 +46,7 @@ function App() {
   const [zip, setZip] = useState("");
   const [trailResults, setTrailResults] = useState({});
   // const [likedTrails, setLikedTrails] = useState({})
+
   const [likedTrails, setLikedTrails] = useState({
     287295: trail2,
     279268: trail1
@@ -61,11 +60,6 @@ function App() {
   }, [zip, trailResults, likedTrails]);
 
   const colors = ["#0088FE", "#00C49F", "#FFBB28"];
-  const coordinates = {
-    latitude: 37.554947,
-    longitude: -122.271057
-  }
-  // console.log(coordinates)
 
   return (
     <>
@@ -77,9 +71,13 @@ function App() {
       // likes={likeStore}
       // likeResultes={setLikes}
     />
-    <SlideShow slides={colors}/>
-    <MyComponent coordinates = {coordinates}/>
 
+  <SlideShow 
+    trailResults={trailResults}
+    likedTrails={likedTrails}
+    setLikedTrails={setLikedTrails}
+  />
+    
     <LikedHikesHeader/>
 
     <UserLikedHikes 

@@ -1,19 +1,7 @@
 import { useEffect } from "react";
 import "./Likes.css"
-// function likes_storage(trailSelected, likeStorage, setLikes) {
-//     const id = trailSelected.id;
-//     const copyStorage = likeStorage;
-//     for(const like of copyStorage){
-//         if (like.id === id ){
-//             delete copyStorage.id
-//             setLikes(copyStorage)
-//         }
-//     }
-//     copyStorage[id] = trailSelected
-//     setLikes(copyStorage)
-// }
 
-function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
+export function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
     const id = trailSelected.id; // Make sure trailSelected and its id are defined and passed to this function
     const copyStorage = { ...likedTrails }; // Create a shallow copy of likedTrails
 
