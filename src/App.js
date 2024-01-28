@@ -1,6 +1,9 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
-import Slideshow from "./Components/slideShow";
+import SlideShow from "./Components/SlideShow.js";
+
+//change 
+import initMap from "./APIs/googlemaps.js";
 
 function App() {
   const trail1 = {
@@ -29,15 +32,17 @@ function App() {
     console.log(trailResults)
   }, [zip, trailResults]);
 
+  const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+
   return (
     <>
-    <Slideshow/>
     <UserInput
       zip={zip}
       setZip={setZip}
       trailResults={trailResults}
       setTrailResults={setTrailResults} 
     />
+    <SlideShow slides={colors}/>
     </> 
   )
 }
