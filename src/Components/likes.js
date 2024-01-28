@@ -1,9 +1,7 @@
-import { useEffect } from "react";
 import "./Likes.css"
-import { Slider } from "antd";
 import {TrailSlide} from "./Slide"
 
-export function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
+export function updateLikedTrails(trailSelected, likedTrails, setLikedTrails){
     const id = trailSelected.id; // Make sure trailSelected and its id are defined and passed to this function
     const copyStorage = { ...likedTrails }; // Create a shallow copy of likedTrails
 
@@ -18,15 +16,15 @@ export function updateLikedHikes(trailSelected, likedTrails, setLikedTrails){
     setLikedTrails(copyStorage); // Update the state with the new object
 }
 
-export const LikedHikesHeader = () => {
+export const LikedTrailsHeader = () => {
     return (
         <div className="header">
-            <h1> LIKED HIKES </h1>
+            <h1> LIKED TRAILS </h1>
         </div>
     )
 }
 
-export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
+export const UserLikedTrails= ({ likedTrails, setLikedTrails }) => {
     const likedTrailsArray = Object.values(likedTrails);
   
     // Function to chunk an array into rows of a specific size

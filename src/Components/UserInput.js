@@ -66,6 +66,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
               setZip(e.target.value);
           }}/>
           <Button className="submitButton" type="primary" icon={<SearchOutlined />} 
+          // TOAST: searching!
           onClick={submitZipcode}>
           Search
           </Button>
@@ -79,6 +80,8 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
                     radius: radius,
                     difficulty: difficulty
                 };
+
+                //TOAST : either after success or after search
 
                 getTrails(my_data).then(response => {
                     setTrailResults(response);
