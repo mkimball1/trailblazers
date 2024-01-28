@@ -8,8 +8,7 @@ import logo1 from "../images/picture-logo.png";
 import logo2 from "../images/text-logo.png";
 import "./Navbar.css"
 import {createUser, getUsers, updateUser} from "../APIs/userdata"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
@@ -24,7 +23,6 @@ export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
 
   return (
     <Navbar bg="light" className="full-width-navbar">
-      <ToastContainer />
       <Form inline>
         <Row className="baseline-align">
           <Col>
@@ -56,15 +54,12 @@ export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
               console.log(foundUser);
 
               if (foundUser) {
-                toast.success("User Saved")
                 updateUser(username, data);
               }
               else {
-                if (username === '') {
-                  toast.error('Invalid input!')
+                if (username !== '') {
+                  createUser(data);
                 }
-                toast.success("User Saved")
-                createUser(data)
               }
 
             }} className='save-button' > Save </Button>
@@ -80,13 +75,8 @@ export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
 
 
                 if (foundUser) {
-                  toast.success("User Loaded!")
                   setLikedTrails(foundUser.likedTrails);
                 }
-
-                toast.error("User not found!")
-                
-                
             }}> Load </Button>
           </Col>
         </Row>

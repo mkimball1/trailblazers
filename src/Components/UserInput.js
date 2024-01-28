@@ -12,10 +12,6 @@ import "./UserInput.css";
 import { Button, Card, Checkbox, Input, Slider } from 'antd';
 import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const [radius, setRadius] = useState(50)
     const [difficulty, setDifficulty] = useState({
@@ -40,13 +36,8 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
 
               getTrails(my_data).then(response => {
                   setTrailResults(response);
-
-                  // Toast: Results found
-                  toast.success("Results found");
               })
           } else {
-              // Toast: Invalid Zip Code
-              toast.error("Invalid Zip Code");
               console.log("Invalid Zipcode")
           }
       });
@@ -65,12 +56,8 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
           getTrails(my_data).then(response => {
               setTrailResults(response);
 
-              // Toast: Results found
-              toast.success("Results found");
           });
       }, (error) => {
-          // Toast: Error fetching current position
-          toast.error("Error fetching current position");
           console.error(error);
       });
   };
@@ -86,7 +73,6 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     
     return (
       <div style={{margin: "50px"}}>
-        <ToastContainer />
         <Card  className="form">
         <div className="row">
           <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
