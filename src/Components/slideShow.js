@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
-import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes"
-
+import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
+import "./SlideShow.css"
 import { Button} from 'antd';
 import TrailSlide from "./Slide.js";
 
@@ -19,14 +19,36 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
     setCurrentIndex(prevIndex => (prevIndex + 1) % slides.length);
   };
 
+  if (slides.length === 0) {
+    // Optionally render something else or nothing if there are no slides
+    return null; // or return <SomeOtherComponent /> or any JSX you prefer
+}
+  console.log("liked trails: ", likedTrails)
+  console.log("curr trail: ", slides[currentIndex].key)
+
   return (
     <div>
       {slides[currentIndex]}
-      <Button onClick={() => {goToPreviousComponent()}}> Prev </Button>
-      <button onClick={() => {
+      <div className="container">
+        <Button onClick={() => {goToPreviousComponent()}}> Prev </Button>
+        
+
+        {likedTrails.hasOwnProperty(slides[currentIndex].key) ? 
+        <Button type="primary" danger onClick={() => {
           updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
-      }}> Toggle Like </button>
-      <Button onClick={() => {goToNextComponent()}}> Next </Button>
+        }}> Dislike </Button>
+        : 
+        <Button type="primary" onClick={() => {
+          updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
+        }}> Like </Button>
+        }
+
+
+        
+
+        <Button onClick={() => {goToNextComponent()}}> Next </Button>
+      </div>
+      
     </div>
   );
 }

@@ -14,7 +14,7 @@ import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
 
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
-    const [radius, setRadius] = useState(25)
+    const [radius, setRadius] = useState(50)
     const [difficulty, setDifficulty] = useState({
         Beginner: true,
         Intermediate: true,
