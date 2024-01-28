@@ -39,7 +39,6 @@ export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
                 
             ))}
         </div>
-            
 
             <div style={{display: "flex"}}>
                 <p style={{width: "30%"}}> 1 </p>
