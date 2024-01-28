@@ -1,7 +1,8 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
 import SlideShow from "./Components/SlideShow.js";
-import { FormExample } from "./Components/Navbar.js"
+import { NaviBar } from "./Components/Navbar.js"
+
 
 //change 
 import {UserLikedHikes, LikedHikesHeader} from "./Components/Likes.js"
@@ -47,30 +48,28 @@ function App() {
 
   const [zip, setZip] = useState("");
   const [trailResults, setTrailResults] = useState({});
-  // const [likedTrails, setLikedTrails] = useState({})
-
   const [likedTrails, setLikedTrails] = useState({
     287295: trail2,
     279268: trail1
   });
+  const [username, setUser] = useState("");
+  const [currUser, setCurrUser] = useState();
+  const [currSession, setCurrSession] = useState();
 
-  // console.log(likedTrails)
 
   useEffect(() => {
-    // console.log(zip)
-    // console.log(trailResults)
   }, [zip, trailResults, likedTrails]);
 
   return (
     <>
-    <FormExample/>
+    <NaviBar 
+
+    />
     <UserInput
       zip={zip}
       setZip={setZip}
       trailResults={trailResults}
       setTrailResults={setTrailResults}
-      // likes={likeStore}
-      // likeResultes={setLikes}
     />
 
   <SlideShow 

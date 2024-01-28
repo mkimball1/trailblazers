@@ -8,7 +8,22 @@ import logo1 from "../images/picture-logo.png";
 import logo2 from "../images/text-logo.png";
 import "./Navbar.css"
 
-export function FormExample() {
+
+function createUser(){
+  const data = {
+    "username": username,
+    "sessions": []
+  }
+  axios.post('https://us-central1.gcp.data.mongodb-api.com/app/trailblazer-dufbj/endpoint/createUser', data)
+    .then(response => {
+        console.log('Response:', response.data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+export function NaviBar({username, setUser, currUser, setCurrUser, currSess, setCurrSess}) {
   return (
     <Navbar>
       <Form inline>
@@ -35,3 +50,5 @@ export function FormExample() {
     </Navbar>
   );
 }
+
+export default NaviBar
