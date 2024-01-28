@@ -1,9 +1,9 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
-import SlideShow from "./Components/SlideShow.js";
+import SlideShow from "./Components/slideShow.js";
 
 //change 
-import MyComponent from "./APIs/googlemaps.js";
+import MyMap from "./APIs/googlemaps.js";
 
 function App() {
   const trail1 = {
@@ -52,7 +52,7 @@ function App() {
     />
     <SlideShow slides={colors}/>
 
-    <MyComponent coordinates = {coordinates}/>
+    <MyMap coordinates = {coordinates}/>
     </> 
   )
 }

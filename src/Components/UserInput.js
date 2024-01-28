@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { getCurrentPosition } from "../APIs/currentloc";
 import { getTrails } from "../APIs/rapidapi";
 import { convertZipToLatLong } from "../APIs/thezipcodes";
-import {loader} from "../APIs/googlemaps"
 // Stylesheet
 import "./UserInput.css";
 
