@@ -19,6 +19,11 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
     setCurrentIndex(prevIndex => (prevIndex + 1) % slides.length);
   };
 
+  if (slides.length === 0) {
+    // Optionally render something else or nothing if there are no slides
+    return null; // or return <SomeOtherComponent /> or any JSX you prefer
+}
+
   return (
     <div>
       {slides[currentIndex]}
