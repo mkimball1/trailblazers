@@ -1,49 +1,45 @@
+import { useState,useEffect } from "react";
+import { Button} from 'antd';
 import { useState, useEffect } from "react";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28"];
 const delay = 2500;
 
-function Slideshow() {
+function SlideShow(slides) {
+  slides = slides.slides
   const [index, setIndex] = useState(0);
+  const [currSlide, setCurrSlide] = useState(
+    // Tentative
+    slides[0]
+  )
+
+  const changeCurrSlide = (move) => {
+    let newIndex = index+move
+    if(newIndex < 0){
+      //tentative
+      setIndex(slides.length-1)
+    } 
+    else if (newIndex >= slides.length){
+      setIndex(0)
+    }
+    else{
+      setIndex(newIndex)
+    }
+  }
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndex((prevIndex) =>
-        prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-      );
-    }, delay);
-
-    return () => clearInterval(intervalId);
-  }, []);
+    // tentative
+    setCurrSlide(slides[index])
+    console.log(index, slides)
+  }, [index])
 
   return (
-    <div className="slideshow">
-      <div
-        className="slideshowSlider"
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
-        {colors.map((backgroundColor, idx) => (
-          <div
-            className="slide"
-            key={idx}
-            style={{ backgroundColor }}
-          ></div>
-        ))}
-      </div>
-
-      <div className="slideshowDots">
-        {colors.map((_, idx) => (
-          <div
-            key={idx}
-            className={`slideshowDot${index === idx ? " active" : ""}`}
-            onClick={() => {
-              setIndex(idx);
-            }}
-          ></div>
-        ))}
-      </div>
+    <div>
+      <p> {currSlide} </p>
+      <Button onClick={() => {changeCurrSlide(-1)}}> Prev </Button>
+      <Button onClick={() => {changeCurrSlide(1)}}> Next </Button>
     </div>
   );
 }
 
-export default Slideshow;
+export default SlideShow

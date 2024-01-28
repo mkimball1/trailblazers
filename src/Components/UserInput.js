@@ -1,17 +1,17 @@
-import { useState,useEffect } from "react";
-import { getTrails } from "../APIs/rapidapi"
-import { convertZipToLatLong } from "../APIs/thezipcodes"
+// React-related imports
+import { useEffect, useState } from "react";
+
+// Project-specific APIs
 import { getCurrentPosition } from "../APIs/currentloc";
-import "./UserInput.css"
+import { getTrails } from "../APIs/rapidapi";
+import { convertZipToLatLong } from "../APIs/thezipcodes";
+import {loader} from "../APIs/googlemaps"
+// Stylesheet
+import "./UserInput.css";
 
-import { Card } from 'antd';
-import { EnvironmentOutlined } from '@ant-design/icons';
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, Flex, Tooltip } from 'antd';
-import { Input } from 'antd';
-import { Slider } from 'antd';
-import { Checkbox } from 'antd';
-
+// External libraries or frameworks
+import { Button, Card, Checkbox, Input, Slider } from 'antd';
+import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
 
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
@@ -36,7 +36,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
             radius: radius,
             difficulty: difficulty
           }
-          
+
           getTrails(my_data).then(response => {
               setTrailResults(response)
           })
