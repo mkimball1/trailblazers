@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
+import {updateLikedTrails} from "./Likes.js"
 import "./SlideShow.css"
 import { Button} from 'antd';
 import TrailSlide from "./Slide.js";
@@ -35,11 +35,11 @@ function SlideShow({trailResults, likedTrails, setLikedTrails}) {
 
         {likedTrails.hasOwnProperty(slides[currentIndex].key) ? 
         <Button className="like" type="primary" danger onClick={() => {
-          updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
+          updateLikedTrails(trailResults[currentIndex], likedTrails, setLikedTrails)
         }}> Dislike </Button>
         : 
         <Button className="like" type="primary" onClick={() => {
-          updateLikedHikes(trailResults[currentIndex], likedTrails, setLikedTrails)
+          updateLikedTrails(trailResults[currentIndex], likedTrails, setLikedTrails)
         }}> Like </Button>
         }
         <Button className="button" onClick={() => {goToNextComponent()}}> Next </Button>

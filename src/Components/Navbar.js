@@ -9,7 +9,7 @@ import logo2 from "../images/text-logo.png";
 import "./Navbar.css"
 import {createUser} from "../APIs/userdata"
 
-export function FormExample({username, setUsername, likedTrails, setLikedTrails}) {
+export function NaviBar({username, setUsername, likedTrails, setLikedTrails}) {
   // console.log("HELP", username, setUsername, likedTrails, setLikedTrails)
 
   const handleInputChange = (e) => {

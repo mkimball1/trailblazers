@@ -7,7 +7,7 @@ import { NaviBar } from "./Components/Navbar.js"
 import backgroundImg from "./images/background.png";
 
 //change 
-import {UserLikedHikes, LikedHikesHeader} from "./Components/Likes.js"
+import {UserLikedTrails, LikedTrailsHeader} from "./Components/Likes.js"
 
 function App() {
   const [zip, setZip] = useState("");
@@ -30,7 +30,7 @@ function App() {
       backgroundRepeat: "no-repeat", // Do not repeat the image
       backgroundSize: "cover" // Resize the background image to cover the entire container
     }}>
-      <FormExample 
+      <NaviBar 
         username={username} 
         setUsername={setUsername}
         likedTrails={likedTrails}
@@ -51,9 +51,9 @@ function App() {
       setLikedTrails = {setLikedTrails}
     />
       
-      <LikedHikesHeader/>
+      <LikedTrailsHeader/>
 
-      <UserLikedHikes 
+      <UserLikedTrails
         likedTrails = {likedTrails}  
         setLikedTrails = {setLikedTrails}
       />
