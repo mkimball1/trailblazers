@@ -60,8 +60,6 @@ function App() {
     // console.log(trailResults)
   }, [zip, trailResults, likedTrails]);
 
-  const colors = ["#0088FE", "#00C49F", "#FFBB28"];
-
   return (
     <>
     <UserInput
@@ -75,8 +73,8 @@ function App() {
 
   <SlideShow 
     trailResults={trailResults}
-    likedTrails={likedTrails}
-    setLikedTrails={setLikedTrails}
+    likedTrails = {likedTrails}  
+    setLikedTrails = {setLikedTrails}
   />
     
     <LikedHikesHeader/>
