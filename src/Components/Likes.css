@@ -24,10 +24,11 @@
 }
 
 .liked-slide {
-    flex: 0 0 30%;
+    flex: 1 0 calc(33.33% - 20px);
     box-sizing: border-box;
     margin: 10px;
     padding: 10px;
+    border: 10px solid #070707;
     font-size: 0.9em;
 }
 

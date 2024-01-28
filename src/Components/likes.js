@@ -29,13 +29,24 @@ export const LikedHikesHeader = () => {
 }
 
 export const UserLikedHikes = ({ likedTrails, setLikedTrails }) => {
+    const likedTrailsArray = Object.values(likedTrails);
+  
     return (
-        <div className="liked-slides-container">
-            {Object.values(likedTrails).map((trail, index) => (
-                <div classname="liked-slide" key={index}>
-                    <TrailSlide trail={trail} />
-                </div>
-            ))}
-        </div>
+      <div className="liked-slides-container">
+        {likedTrailsArray.reduce((rows, slide, index) => {
+          if (index % 3 === 0) rows.push([]);
+          rows[rows.length - 1].push(
+            <div className="liked-slide" key={index}>
+              <TrailSlide trail={slide} />
+            </div>
+          );
+          return rows;
+        }, []).map((row, index) => (
+          <div className="liked-slides-row" key={index}>
+            {row}
+          </div>
+        ))}
+      </div>
     );
-};
+  };
+  
