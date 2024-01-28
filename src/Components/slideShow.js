@@ -3,7 +3,7 @@ import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
 
 // import {TrailSlide} from "./Components/Slide.js"
 import { Button} from 'antd';
-import TrailSlide from "./Slide";
+import TrailSlide from "./Slide.js";
 
 function SlideShow(trailResults, likedTrails, setLikedTrails) {
   console.log(trailResults, likedTrails, setLikedTrails)
