@@ -60,7 +60,7 @@ function MyMap({ coordinates , name }) {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={{
-        width: '400px',
+        width: '450px',
         height: '400px'
       }}
       center={center}

@@ -59,7 +59,7 @@ export function TrailSlide({trail, showPhoto=true}) {
             
 
             <>
-                <Offcanvas style={{width: "430px"}}show={show} onHide={handleClose}>
+                <Offcanvas style={{width: "500px"}}show={show} onHide={handleClose}>
                     <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Google Map View</Offcanvas.Title>
                     </Offcanvas.Header>
