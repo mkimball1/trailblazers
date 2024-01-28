@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { getCurrentPosition } from "../APIs/currentloc";
 import { getTrails } from "../APIs/rapidapi";
 import { convertZipToLatLong } from "../APIs/thezipcodes";
-import {loader} from "../APIs/googlemaps"
 // Stylesheet
 import "./UserInput.css";
 
@@ -13,9 +12,8 @@ import "./UserInput.css";
 import { Button, Card, Checkbox, Input, Slider } from 'antd';
 import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
-
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
-    const [radius, setRadius] = useState(25)
+    const [radius, setRadius] = useState(50)
     const [difficulty, setDifficulty] = useState({
         Beginner: true,
         Intermediate: true,
@@ -28,26 +26,41 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const submitZipcode = (e) => {
       e.preventDefault();
       convertZipToLatLong(zip).then(data => {
-        console.log("HELLO: ", data)
-        if (data){
-          let my_data = {
-            latitude: data.latitude,
-            longitude: data.longitude,
-            radius: radius,
-            difficulty: difficulty
+          if (data) {
+              let my_data = {
+                  latitude: data.latitude,
+                  longitude: data.longitude,
+                  radius: radius,
+                  difficulty: difficulty
+              }
+
+              getTrails(my_data).then(response => {
+                  setTrailResults(response);
+              })
+          } else {
+              console.log("Invalid Zipcode")
           }
+      });
+  }
+
+  const handleCurrentLocationClick = (e) => {
+      e.preventDefault();
+      getCurrentPosition((latitude, longitude) => {
+          const my_data = {
+              latitude: latitude,
+              longitude: longitude,
+              radius: radius,
+              difficulty: difficulty
+          };
 
           getTrails(my_data).then(response => {
-              setTrailResults(response)
-          })
-          // TODO: Toast that says: Loaded zipcode: {zip}
-        }
-        else {
-          // TODO : Toast that says: "invalid zip code"
-          console.log("Invalid Zipcode")
-        }
-      })
-    }
+              setTrailResults(response);
+
+          });
+      }, (error) => {
+          console.error(error);
+      });
+  };
 
     const handleCheckboxes = (event) => {
         setDifficulty({
@@ -59,37 +72,21 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const formatter = (value) => `${value} miles`;
     
     return (
-      <div>
-        <Card className="form">
+      <div style={{margin: "50px"}}>
+        <Card  className="form">
         <div className="row">
           <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
           value={zip}
           onChange={(e) => {
               setZip(e.target.value);
           }}/>
-          <Button className="submitButton" type="primary" icon={<SearchOutlined />}
+          <Button className="submitButton" type="primary" icon={<SearchOutlined />} 
+          // TOAST: searching!
           onClick={submitZipcode}>
-            Search
+          Search
           </Button>
           <Button danger className="currentLocation" type="primary" icon={<EnvironmentOutlined/>}
-          onClick={(e) => {
-            e.preventDefault();
-            getCurrentPosition((latitude, longitude) => {
-                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-                const my_data = {
-                    latitude: latitude,
-                    longitude: longitude,
-                    radius: radius,
-                    difficulty: difficulty
-                };
-
-                getTrails(my_data).then(response => {
-                    setTrailResults(response);
-                });
-            }, (error) => {
-                console.error(error);
-            });
-            }}
+          onClick={handleCurrentLocationClick}
             />
         </div>
         

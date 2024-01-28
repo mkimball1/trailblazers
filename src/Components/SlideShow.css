@@ -3,7 +3,7 @@
 .slideshow {
     margin: 0 auto;
     overflow: hidden;
-    max-width: 500px;
+    max-width: 70%;
   }
   
   .slideshowSlider {
@@ -39,4 +39,23 @@
   
   .slideshowDot.active {
     background-color: #6a0dad;
+  }
+
+
+  .container {
+    /* border: 1px solid black; */
+    display: flex;           /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .container .button{
+    width: 30%;
+    margin: auto;
+  }
+
+  .container .like{
+    width: 20%;
+    margin: auto;
   }

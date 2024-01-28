@@ -1,0 +1,21 @@
+.trailSlide {
+    margin: auto;
+    width: 70%;
+    box-shadow: 0px 5px 50px 5px rgba(0, 0, 0, 0.4);
+}
+
+.name {
+  font-size: 150%;
+}
+
+.map{
+    margin-right: 10px;
+}
+
+.container {
+    display: flex;
+}
+
+.half {
+    flex: 1; /* Each child will take up an equal amount of space */
+}

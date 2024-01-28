@@ -1,35 +1,76 @@
-import { Loader } from "@googlemaps/js-api-loader"
-let map;
+import React from 'react';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
 
-const loader = new Loader({
-    apiKey: "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY",
-    version: "weekly"
-});
+const API_KEY = "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY";
 
-async function initMap(location, name) {
-  try {
-    // Load the Google Maps API
-    await loader.load();
+function MyMap({ coordinates , name }) {
+  const center = {
+    lat: coordinates.latitude,
+    lng: coordinates.longitude
+  };
 
-    // Access the loaded libraries
-    const { google } = loader;
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: API_KEY
+  });
 
-    // Create the map
-    map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: location,
-      mapId: "MAP-ID",
-    });
+  const [map, setMap] = React.useState(null);
+  const [marker, setMarker] = React.useState(null);
 
-    // Create a marker
-    const marker = new google.maps.Marker({
-      map: map,
-      position: location,
-      title: name,
-    });
-  } catch (error) {
-    console.error("Error loading Google Maps API:", error);
-  }
+  React.useEffect(() => {
+    if (isLoaded && map) {
+      const newMarker = new MarkerWithLabel({
+        position: new window.google.maps.LatLng(coordinates.latitude, coordinates.longitude),
+        clickable: true,
+        draggable: true,
+        map: map,
+        labelContent: name,
+        labelAnchor: new window.google.maps.Point(-21, 3),
+        labelClass: "labels",
+        labelStyle: { opacity: 1.0 },
+      });
+
+      setMarker(newMarker);
+
+      return () => {
+        newMarker.setMap(null); // Remove the marker from the map on cleanup
+      };
+    }
+  }, [isLoaded, map, coordinates]);
+
+  const onLoad = React.useCallback(function callback(map) {
+    // Set a maximum zoom level to prevent being too zoomed in
+    const maxZoom = 14; // You can adjust this value
+  
+    // Manually set the center and zoom level
+    map.setCenter(new window.google.maps.LatLng(coordinates.latitude, coordinates.longitude));
+    map.setZoom(maxZoom);
+  
+    setMap(map);
+  }, [coordinates]);
+  
+  
+  
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={{
+        width: '450px',
+        height: '400px'
+      }}
+      center={center}
+      zoom={2}
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+    >
+      <></>
+    </GoogleMap>
+  ) : <></>;
 }
 
-export default initMap;
+export default React.memo(MyMap);

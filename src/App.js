@@ -1,50 +1,67 @@
 import { useState,useEffect } from "react";
 import Slideshow from "./Components/slideshow";
 import UserInput from "./Components/UserInput";
-import SlideShow from "./Components/slideShow.js";
+import SlideShow from "./Components/SlideShow.js";
+import { NavBar } from "./Components/Navbar.js"
+
+
+import backgroundImg from "./images/background.png";
 
 //change 
-import initMap from "./APIs/googlemaps.js";
+import {UserLikedTrails, LikedTrailsHeader} from "./Components/Likes.js"
 
 function App() {
-  const trail1 = {
-    city: "Irvine", //
-    country: "United States", //
-    description: "fire road",
-    difficulty: "Intermediate", //
-    directions: "top - Ridge Park, bottom - Bommer Canyon",
-    features: "",
-    id: 279268, //
-    lat: "33.65656",
-    length: "1.0", 
-    lon: "-117.80883", 
-    name: "West Fork",
-    rating: 2, 
-    region: "California", 
-    thumbnail: "https://images.singletracks.com/blog/wp-content/uploads/2014/10/2014-10-09095330HDR-orig-scaled.jpg",//
-    url: "https://www.singletracks.com/bike-trails/west-fork/"
-  };
-
   const [zip, setZip] = useState("");
   const [trailResults, setTrailResults] = useState({});
+  const [likedTrails, setLikedTrails] = useState({});
+
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    console.log(zip)
+    console.log(username)
+    console.log(likedTrails)
     console.log(trailResults)
-  }, [zip, trailResults]);
-
-  const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+  }, [username, likedTrails]);
 
   return (
-    <>
-    <UserInput
-      zip={zip}
-      setZip={setZip}
+    <div style={{
+      margin: "0px",
+      backgroundImage: `url(${backgroundImg})`, // Using template literals
+      minHeight: "100vh", // Corrected to minHeight
+      height: "100%", // Full height
+      backgroundPosition: "center", // Center the image
+      backgroundRepeat: "repeat", // Do not repeat the image
+      backgroundSize: "cover" // Resize the background image to cover the entire container
+    }}>
+      <NavBar 
+        username={username} 
+        setUsername={setUsername}
+        likedTrails={likedTrails}
+        setLikedTrails={setLikedTrails}
+      />
+
+      <UserInput
+        zip={zip}
+        setZip={setZip}
+        trailResults={trailResults}
+        setTrailResults={setTrailResults}
+        // likes={likeStore}
+        // likeResultes={setLikes}
+      />
+
+    <SlideShow 
       trailResults={trailResults}
-      setTrailResults={setTrailResults} 
+      likedTrails = {likedTrails}  
+      setLikedTrails = {setLikedTrails}
     />
-    <SlideShow slides={colors}/>
-    </> 
+      
+      <LikedTrailsHeader/>
+
+      <UserLikedTrails
+        likedTrails = {likedTrails}  
+        setLikedTrails = {setLikedTrails}
+      />
+    </div>
   )
 }
 

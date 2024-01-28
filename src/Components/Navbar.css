@@ -1,0 +1,22 @@
+img {
+    margin-left: 15px;
+    height: 100px;
+}
+
+.textlogo {
+    height: 50px;
+    margin-right: 700px;
+}
+
+.baseline-align {
+    display: flex;
+    align-items: baseline;
+  }
+
+.save-button {
+    margin-right: 5px; /* Adjust the value to add more or less space */
+}
+
+.load-button {
+    margin-left: 5px; /* Adjust the value to add more or less space */
+}

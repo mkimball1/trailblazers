@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const createOptions = (data) => {
-    console.log(data.latitude, data.longitude)
     return {
         method: 'GET',
         url: 'https://trailapi-trailapi.p.rapidapi.com/trails/explore/',
@@ -18,7 +17,6 @@ export const createOptions = (data) => {
 };
 
 export const getTrails = async (data) => {
-    console.log("MY DATA" ,data)
     try {
         let response = await axios.request(createOptions({
             "latitude": data.latitude, 
