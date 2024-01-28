@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28"];
 const delay = 2500;
@@ -7,16 +7,14 @@ function Slideshow() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
+    const intervalId = setInterval(() => {
+      setIndex((prevIndex) =>
+        prevIndex === colors.length - 1 ? 0 : prevIndex + 1
+      );
+    }, delay);
 
-    return () => {};
-  }, [index]);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="slideshow">
@@ -24,10 +22,10 @@ function Slideshow() {
         className="slideshowSlider"
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
-        {colors.map((backgroundColor, index) => (
+        {colors.map((backgroundColor, idx) => (
           <div
             className="slide"
-            key={index}
+            key={idx}
             style={{ backgroundColor }}
           ></div>
         ))}
@@ -48,4 +46,4 @@ function Slideshow() {
   );
 }
 
-export default Slideshow
+export default Slideshow;
