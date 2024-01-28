@@ -26,7 +26,7 @@ function SlideShow(slides) {
   useEffect(() => {
     // tentative
     setCurrSlide(slides[index])
-    console.log(index, slides)
+    // console.log(index, slides)
   }, [index])
 
   return (

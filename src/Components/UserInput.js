@@ -28,7 +28,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const submitZipcode = (e) => {
       e.preventDefault();
       convertZipToLatLong(zip).then(data => {
-        console.log("HELLO: ", data)
+        // console.log("HELLO: ", data)
         if (data){
           let my_data = {
             latitude: data.latitude,
@@ -75,7 +75,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
           onClick={(e) => {
             e.preventDefault();
             getCurrentPosition((latitude, longitude) => {
-                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
                 const my_data = {
                     latitude: latitude,
                     longitude: longitude,

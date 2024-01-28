@@ -12,7 +12,7 @@ let API_KEY = "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY"
 
 
 function MyComponent({coordinates}) {
-  console.log(coordinates)
+  // console.log(coordinates)
   const center = {
     lat: coordinates.latitude,
     lng: coordinates.longitude
