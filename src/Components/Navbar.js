@@ -9,11 +9,10 @@ import logo2 from "../images/text-logo.png";
 import "./Navbar.css"
 import {createUser, getUsers, updateUser} from "../APIs/userdata"
 
+
 export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
-  // console.log("HELP", username, setUsername, likedTrails, setLikedTrails)
 
   const handleInputChange = (e) => {
-    // console.log(e.target.value);
     setUsername(e.target.value);
   };
 
@@ -50,33 +49,34 @@ export function NavBar({username, setUsername, likedTrails, setLikedTrails}) {
               let users = await getUsers();
               console.log(users);
 
-              //CHECK IF THE USERNAME IS IN THE DATABASE
-              const foundUser = users.find(user => user.name === username);
+              const foundUser = users.find(user => user.username === username);
               console.log(foundUser);
 
-              //IF IT DOES, UPDATE USER
-                // updateUser(username, data);
-              //ELSE, CREATE NEW USER
-                // createUser(data);
+              if (foundUser) {
+                updateUser(username, data);
+              }
+              else {
+                createUser(data)
+              }
+
             }} className='save-button' > Save </Button>
 
             <Button className="load-button"
             onClick={async () => {
-                let data = {
-                  username: username,
-                  likedTrails: likedTrails
-                }
 
                 let users = await getUsers();
-                console.log(users);
 
-                //CHECK IF THE USERNAME IS IN THE DATABASE
-                const foundUser = users.find(user => user.name === username);
+
+                const foundUser = users.find(user => user.username === username);
                 console.log(foundUser);
 
-                //IF IT DOES, UPDATE USERNAME & LIKED TRAILS
-                setLikedTrails(users[username])
-                //ELSE, DO NOTHING
+
+                if (foundUser) {
+                  console.log("LOADED");
+                  console.log(foundUser.likedTrails);
+                  setLikedTrails(foundUser.likedTrails);
+                }
+
 
                 
                 

@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import UserInput from "./Components/UserInput";
 import SlideShow from "./Components/SlideShow.js";
-import { NaviBar } from "./Components/Navbar.js"
+import { NavBar } from "./Components/Navbar.js"
 
 
 import backgroundImg from "./images/background.png";
@@ -31,7 +31,7 @@ function App() {
       backgroundRepeat: "repeat", // Do not repeat the image
       backgroundSize: "cover" // Resize the background image to cover the entire container
     }}>
-      <NaviBar 
+      <NavBar 
         username={username} 
         setUsername={setUsername}
         likedTrails={likedTrails}
