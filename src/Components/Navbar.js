@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import logo1 from "../images/picture-logo.png";
 import logo2 from "../images/text-logo.png";
 import "./Navbar.css"
-import {createUser} from "../APIs/userdata"
+import {createUser, getUsers, updateUser} from "../APIs/userdata"
 
 export function FormExample({username, setUsername, likedTrails, setLikedTrails}) {
   // console.log("HELP", username, setUsername, likedTrails, setLikedTrails)
@@ -46,7 +46,11 @@ export function FormExample({username, setUsername, likedTrails, setLikedTrails}
                 username: username,
                 likedTrails: likedTrails
               }
-              createUser(data)
+
+              updateUser("Test2", {data: "woopie"})
+              // getUsers(data)
+              // createUser(data)
+
             }} className='save-button' > Save </Button>
             <Button onClick={() => {
 
