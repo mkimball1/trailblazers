@@ -12,7 +12,10 @@ import "./UserInput.css";
 import { Button, Card, Checkbox, Input, Slider } from 'antd';
 import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+let notify = ToastContainer;
 function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const [radius, setRadius] = useState(50)
     const [difficulty, setDifficulty] = useState({
@@ -27,25 +30,50 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     const submitZipcode = (e) => {
       e.preventDefault();
       convertZipToLatLong(zip).then(data => {
-        if (data){
-          let my_data = {
-            latitude: data.latitude,
-            longitude: data.longitude,
-            radius: radius,
-            difficulty: difficulty
+          if (data) {
+              let my_data = {
+                  latitude: data.latitude,
+                  longitude: data.longitude,
+                  radius: radius,
+                  difficulty: difficulty
+              }
+
+              getTrails(my_data).then(response => {
+                  setTrailResults(response);
+
+                  // Toast: Results found
+                  toast.success("Results found");
+              })
+          } else {
+              // Toast: Invalid Zip Code
+              toast.error("Invalid Zip Code");
+              console.log("Invalid Zipcode")
           }
+      });
+  }
+
+  const handleCurrentLocationClick = (e) => {
+      e.preventDefault();
+      getCurrentPosition((latitude, longitude) => {
+          const my_data = {
+              latitude: latitude,
+              longitude: longitude,
+              radius: radius,
+              difficulty: difficulty
+          };
 
           getTrails(my_data).then(response => {
-              setTrailResults(response)
-          })
-          // TODO: Toast that says: Loaded zipcode: {zip}
-        }
-        else {
-          // TODO : Toast that says: "invalid zip code"
-          console.log("Invalid Zipcode")
-        }
-      })
-    }
+              setTrailResults(response);
+
+              // Toast: Results found
+              toast.success("Results found");
+          });
+      }, (error) => {
+          // Toast: Error fetching current position
+          toast.error("Error fetching current position");
+          console.error(error);
+      });
+  };
 
     const handleCheckboxes = (event) => {
         setDifficulty({
@@ -58,6 +86,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
     
     return (
       <div style={{margin: "50px"}}>
+        <ToastContainer />
         <Card  className="form">
         <div className="row">
           <Input className="zipInput" size="large" placeholder="Zipcode" prefix={<EnvironmentOutlined/>} 
@@ -71,25 +100,7 @@ function UserInput({zip, setZip, trailResults, setTrailResults}) {
           Search
           </Button>
           <Button danger className="currentLocation" type="primary" icon={<EnvironmentOutlined/>}
-          onClick={(e) => {
-            e.preventDefault();
-            getCurrentPosition((latitude, longitude) => {
-                const my_data = {
-                    latitude: latitude,
-                    longitude: longitude,
-                    radius: radius,
-                    difficulty: difficulty
-                };
-
-                //TOAST : either after success or after search
-
-                getTrails(my_data).then(response => {
-                    setTrailResults(response);
-                });
-            }, (error) => {
-                console.error(error);
-            });
-            }}
+          onClick={handleCurrentLocationClick}
             />
         </div>
         

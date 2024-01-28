@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import {updateLikedTrails} from "./Likes.js"
 import "./SlideShow.css"
 import { Button} from 'antd';
