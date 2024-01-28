@@ -1,35 +1,77 @@
-import { Loader } from "@googlemaps/js-api-loader"
-let map;
+// import { Loader } from "@googlemaps/js-api-loader"
+import React from 'react'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
 
-const loader = new Loader({
-    apiKey: "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY",
-    version: "weekly"
-});
+let API_KEY = "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY"
 
-async function initMap(location, name) {
-  try {
-    // Load the Google Maps API
-    await loader.load();
+// const containerStyle = {
+//   width: '400px',
+//   height: '400px'
+// };
 
-    // Access the loaded libraries
-    const { google } = loader;
 
-    // Create the map
-    map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: location,
-      mapId: "MAP-ID",
-    });
+function MyComponent({coordinates}) {
+  console.log(coordinates)
+  const center = {
+    lat: coordinates.latitude,
+    lng: coordinates.longitude
+  };
+  
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: API_KEY
+  })
 
-    // Create a marker
-    const marker = new google.maps.Marker({
-      map: map,
-      position: location,
-      title: name,
-    });
-  } catch (error) {
-    console.error("Error loading Google Maps API:", error);
-  }
+  const [map, setMap] = React.useState(null)
+  const [marker, setMarker] = React.useState(null)
+
+  React.useEffect(() => {
+    if (isLoaded && map) {
+      // Now you can safely use the google object
+      const newMarker = new MarkerWithLabel({
+        position: new window.google.maps.LatLng(49.475, -123.84),
+        clickable: true,
+        draggable: true,
+        map: map,
+        labelContent: "foo",
+        labelAnchor: new window.google.maps.Point(-21, 3),
+        labelClass: "labels",
+        labelStyle: { opacity: 1.0 },
+      });
+
+      setMarker(newMarker);
+    }
+  }, [isLoaded, map]);
+
+  const onLoad = React.useCallback(function callback(map) {
+    // This is just an example of getting and using the map instance!!! don't just blindly copy!
+    const bounds = new window.google.maps.LatLngBounds(center);
+    map.fitBounds(bounds);
+
+    setMap(map)
+  }, [center])
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+  return isLoaded ? (
+      <GoogleMap
+        mapContainerStyle={{
+          width: '400px',
+          height: '400px'
+        }}
+        center={center}
+        zoom={2}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* { test } */}
+        <></>
+      </GoogleMap>
+  ) : <></>
 }
 
-export default initMap;
+export default React.memo(MyComponent)
+
