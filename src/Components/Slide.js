@@ -11,6 +11,7 @@ import MyMap from "../APIs/googlemaps.js";
 
 export function TrailSlide(trail) {
     trail = trail.trail
+    let name = trail.name
     let coordinates = {
         latitude: parseFloat(trail.lat),
         longitude: parseFloat(trail.lon)
@@ -62,7 +63,7 @@ export function TrailSlide(trail) {
                     <Offcanvas.Title>Google Map View</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <MyMap coordinates = {coordinates}/>
+                        <MyMap coordinates = {coordinates} name = {name}/>
                     </Offcanvas.Body>
                 </Offcanvas>
             </>

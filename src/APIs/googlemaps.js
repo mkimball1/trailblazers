@@ -4,7 +4,7 @@ import { MarkerWithLabel } from '@googlemaps/markerwithlabel';
 
 const API_KEY = "AIzaSyD9mcHqO8sJBVKh0kKTWrAyh4ZtrJoaRqY";
 
-function MyMap({ coordinates }) {
+function MyMap({ coordinates , name }) {
   const center = {
     lat: coordinates.latitude,
     lng: coordinates.longitude
@@ -25,7 +25,7 @@ function MyMap({ coordinates }) {
         clickable: true,
         draggable: true,
         map: map,
-        labelContent: "foo",
+        labelContent: name,
         labelAnchor: new window.google.maps.Point(-21, 3),
         labelClass: "labels",
         labelStyle: { opacity: 1.0 },
@@ -40,12 +40,18 @@ function MyMap({ coordinates }) {
   }, [isLoaded, map, coordinates]);
 
   const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    bounds.extend(new window.google.maps.LatLng("33.648836", "-117.842727"));
-    map.fitBounds(bounds);
-
+    // Set a maximum zoom level to prevent being too zoomed in
+    const maxZoom = 14; // You can adjust this value
+  
+    // Manually set the center and zoom level
+    map.setCenter(new window.google.maps.LatLng(coordinates.latitude, coordinates.longitude));
+    map.setZoom(maxZoom);
+  
     setMap(map);
-  }, [center, coordinates]);
+  }, [coordinates]);
+  
+  
+  
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
@@ -58,7 +64,7 @@ function MyMap({ coordinates }) {
         height: '400px'
       }}
       center={center}
-      zoom={10}
+      zoom={2}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
