@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes.js"
+import {UserLikedHikes, LikedHikesHeader, updateLikedHikes} from "./Likes"
 
 import { Button} from 'antd';
 import TrailSlide from "./Slide.js";
