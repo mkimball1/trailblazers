@@ -40,3 +40,12 @@
   .slideshowDot.active {
     background-color: #6a0dad;
   }
+
+
+  .container {
+    border: 1px solid black;
+    display: flex;           /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-top: 10px;
+  }
